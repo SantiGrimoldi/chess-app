@@ -7,35 +7,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Pieza {
+    private String id;
     private NombrePieza nombre;
     private User owner;
     private List<Movimiento> movimientos;
     List<MovimientosEspeciales> movimientosEspeciales;
     private boolean piezaGanadora;
 
-    public Pieza (NombrePieza nombre, List<Movimiento> movs, User owner, List<MovimientosEspeciales> movsEspeciales) {
+    public Pieza (NombrePieza nombre, List<Movimiento> movs, User owner, List<MovimientosEspeciales> movsEspeciales, String id) {
         this.nombre = nombre;
         this.movimientos = movs;
         this.owner = owner;
         this.piezaGanadora = false;
-        this.movimientosEspeciales = movsEspeciales;
+        this.movimientosEspeciales = movsEspeciales == null ? new ArrayList<>() : movsEspeciales;
+        this.id = id;
         
     }
 
-    public Pieza(NombrePieza nombre, List<Movimiento> movs, User owner) {
+    public Pieza(NombrePieza nombre, List<Movimiento> movs, User owner, String id) {
         this.nombre = nombre;
         this.movimientos = movs;
         this.owner = owner;
         this.piezaGanadora = false;
         this.movimientosEspeciales = new ArrayList<>();
+        this.id = id;
     }
 
-    public Pieza (NombrePieza nombre, List<Movimiento> movs, User owner, boolean piezaGanadora, List<MovimientosEspeciales> movsEspeciales) {
+    public Pieza (NombrePieza nombre, List<Movimiento> movs, User owner, boolean piezaGanadora, List<MovimientosEspeciales> movsEspeciales, String id) {
         this.nombre = nombre;
         this.movimientos = movs;
         this.owner = owner;
         this.piezaGanadora = piezaGanadora;
-        this.movimientosEspeciales = movsEspeciales;
+        this.movimientosEspeciales = movsEspeciales == null ? new ArrayList<>() : movsEspeciales;
+        this.id = id;
     }
 
     public Boolean movimientoValido (Posicion posicionInicial, Posicion posicionFinal, Tablero tablero) {
@@ -67,14 +71,18 @@ public class Pieza {
         return movimientosEspeciales;
     }
 
+    public String getId() {
+        return id;
+    }
+
     public Pieza sacarMovEspeciales (List<MovimientosEspeciales> movsEspeciales) {
         List<MovimientosEspeciales> nuevosMovsEspeciales = new ArrayList<>(this.movimientosEspeciales);
         nuevosMovsEspeciales.removeAll(movsEspeciales);
-        return new Pieza(this.nombre, this.movimientos, this.owner, this.piezaGanadora, nuevosMovsEspeciales);
+        return new Pieza(this.nombre, this.movimientos, this.owner, this.piezaGanadora, nuevosMovsEspeciales, this.id);
     }
 
     public Pieza limpiarMovimientosEspeciales () {
-        return new Pieza(this.nombre, this.movimientos, this.owner, this.piezaGanadora, new ArrayList<>());
+        return new Pieza(this.nombre, this.movimientos, this.owner, this.piezaGanadora, new ArrayList<>(), this.id);
     }
 
     public boolean equals(Pieza pieza) {

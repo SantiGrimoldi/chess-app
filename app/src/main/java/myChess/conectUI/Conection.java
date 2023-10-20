@@ -23,7 +23,7 @@ public class Conection {
         piezasViejas.forEach((posicion, pieza) -> {
             piezasNuevas.add(
                     new ChessPiece(
-                            "pieza"+pieza.getOwner().getName()+pieza.getNombre()+posicion.getX()+posicion.getY(),
+                            pieza.getId(),
                             pieza.getOwner().getColor(),
                             adaptPosition(posicion),
                             adaptName(pieza.getNombre())));

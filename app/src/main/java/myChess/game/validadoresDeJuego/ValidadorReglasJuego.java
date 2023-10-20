@@ -20,7 +20,7 @@ public class ValidadorReglasJuego implements ValidadorDeJuego{
     public ResultSet validarJuego(Posicion posicionInicial, Posicion posicionFinal, Tablero tablero, User usuario) {
         for (ReglasJuegoMovimiento regla : reglasJuego) {
             if (!regla.movValidoJuego(posicionInicial, posicionFinal, tablero, usuario)) {
-                return new ResultSet(tablero, "Movimiento invalido", false, true);
+                return new ResultSet(tablero, "No cumple las reglas", false, true);
             }
         }
         return new ResultSet(tablero, "Movimiento valido", false, false);

@@ -5,7 +5,6 @@ import edu.austral.dissis.chess.gui.PlayerColor;
 public class User {
     private String name;
     private Partida partida;
-
     private PlayerColor color;
 
 

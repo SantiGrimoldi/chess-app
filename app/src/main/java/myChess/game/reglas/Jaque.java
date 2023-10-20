@@ -9,20 +9,25 @@ import java.util.List;
 
 public class Jaque implements ReglasJuegoMovimiento {
     public static Boolean jaque (Posicion posPieza, Posicion posRey, Tablero tablero) {
-        if (!tablero.tienePieza(posPieza)) return false;
-        Pieza pieza = tablero.obtenerPieza(posPieza);
-        if (pieza.movimientoValido(posPieza, posRey, tablero)) {
-            return true;
+        try{
+            if (!tablero.tienePieza(posPieza)) return false;
+            Pieza pieza = tablero.obtenerPieza(posPieza);
+            if (pieza.movimientoValido(posPieza, posRey, tablero)) {
+                return true;
+            }
+            return false;
         }
-        return false;
+        catch (Exception e) {
+            return false;
+        }
     }
 
     private boolean estoyEnJaque (Posicion rey, Tablero tablero, User jugador) {
 
         for (int i = 0; i< tablero.getFilas(); i++){
             for (int j = 0; j< tablero.getColumnas(); j++){
-                if (tablero.tienePieza(new Posicion(i,j)) && tablero.obtenerPieza(new Posicion(i,j)).getOwner() != jugador) {
-                    Posicion posicion = new Posicion(i,j);
+                Posicion posicion = new Posicion(i,j);
+                if (tablero.tienePieza(posicion) && tablero.obtenerPieza(posicion).getOwner().getColor() != jugador.getColor()) {
                     if (Jaque.jaque(posicion, rey, tablero)) {
                         return true;
                     }
@@ -37,7 +42,7 @@ public class Jaque implements ReglasJuegoMovimiento {
         List<Posicion> reyes = tableroAux.reyes(jugador);
         if (reyes.isEmpty())  return true;
         for (Posicion rey : reyes) {
-            if (tableroAux.obtenerPieza(rey).getOwner() == jugador) {
+            if (tableroAux.obtenerPieza(rey).getOwner().getColor() == jugador.getColor()) {
                 return !estoyEnJaque(rey, tableroAux, jugador);
             }
         }

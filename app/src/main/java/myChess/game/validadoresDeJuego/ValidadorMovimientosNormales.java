@@ -11,7 +11,6 @@ public class ValidadorMovimientosNormales implements ValidadorDeJuego{
     public ResultSet validarJuego(Posicion posicionInicial, Posicion posicionFinal, Tablero tablero, User usuario) {
         if (tablero.estaDentoDeLosLimites(posicionInicial) && tablero.estaDentoDeLosLimites(posicionFinal)) {
             if (!tablero.tienePieza(posicionInicial)) return new ResultSet(tablero, "No hay pieza en la posicion inicial", false, true);
-            if (tablero.tienePieza(posicionFinal) && tablero.obtenerPieza(posicionFinal).getOwner() == usuario) return new ResultSet(tablero, "No puedes comer tu propia pieza", false, true);
             Pieza pieza = tablero.obtenerPieza(posicionInicial);
             if (pieza.movimientoValido(posicionInicial, posicionFinal, tablero)) {
                 Tablero tableroNuevo = actualizarTablero(posicionInicial, posicionFinal, tablero, pieza);

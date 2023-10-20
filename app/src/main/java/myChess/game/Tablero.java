@@ -1,6 +1,7 @@
 package myChess.game;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -55,7 +56,7 @@ public class Tablero {
     }
 
     public boolean estaDentoDeLosLimites(Posicion posicion) {
-        return tablero.size() < posicion.getX() || tablero.get(posicion.getX()).size() < posicion.getY();
+        return getFilas() > posicion.getX() && getColumnas() > posicion.getY();
     }
 
     public Tablero forzarMovimiento(Pieza pieza, Posicion posicionFinal) {
@@ -102,7 +103,7 @@ public class Tablero {
     }
 
     public Map<Posicion, Pieza> getTodasLasPiezas() {
-        Map<Posicion, Pieza> piezas = Map.of();
+        Map<Posicion, Pieza> piezas = new HashMap<>();
         for (int i=0; i<getFilas();i++){
             for (int j=0; j<getColumnas();j++){
                 if (tablero.get(i).get(j) != null) {

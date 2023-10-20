@@ -8,9 +8,9 @@ import myChess.game.User;
 public class ValidadorMoverTuPieza implements ValidadorDeJuego{
     @Override
     public ResultSet validarJuego(Posicion posicionInicial, Posicion posicionFinal, Tablero tablero, User usuario) {
-        if (tablero.tienePieza(posicionInicial) && tablero.obtenerPieza(posicionInicial).getOwner() != usuario) {
+        if (tablero.tienePieza(posicionInicial) && tablero.obtenerPieza(posicionInicial).getOwner().getColor() != usuario.getColor()) {
             return new ResultSet(tablero, "No es tu pieza", false, true);
         }
-        return new ResultSet(tablero, "Movimiento valido", true, false);
+        return new ResultSet(tablero, "Es tu pieza", false, false);
     }
 }
