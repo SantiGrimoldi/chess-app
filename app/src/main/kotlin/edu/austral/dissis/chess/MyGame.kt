@@ -8,12 +8,14 @@ import edu.austral.dissis.chess.gui.PlayerColor.WHITE
 import myChess.game.Posicion
 import myChess.game.Tablero
 import myChess.game.User
+import myChess.game.condicionesGanadoras.JaqueMate
 import myChess.game.movimientosEspeciales.Enroque
 import myChess.game.movimientosEspeciales.PrimeroPeon
 import myChess.game.reglas.Jaque
 import myChess.game.validadoresDeJuego.ResultSet
 import myChess.game.validadoresDeJuego.ValidadorDeJuego
 import myChess.game.validadoresDeJuego.ValidadorCasilleroFinal
+import myChess.game.validadoresDeJuego.ValidadorGanarJuego
 import myChess.game.validadoresDeJuego.ValidadorMoverTuPieza
 import myChess.game.validadoresDeJuego.ValidadorMovimientosEspeciales
 import myChess.game.validadoresDeJuego.ValidadorMovimientosNormales
@@ -25,8 +27,8 @@ public class Mychess: GameEngine {
     private var turno = 0
     private var validadores : List<ValidadorDeJuego> =
         listOf(
-            ValidadorCasilleroFinal(),
             ValidadorMoverTuPieza(),
+            ValidadorGanarJuego(listOf(JaqueMate())),
             ValidadorReglasJuego(listOf(Jaque())),
             ValidadorMovimientosEspeciales(listOf(Enroque(), PrimeroPeon())),
             ValidadorMovimientosNormales()
@@ -35,20 +37,18 @@ public class Mychess: GameEngine {
     override fun applyMove(move: Move) : MoveResult {
         val from  = Posicion(move.from.row -1,move.from.column -1)
         val to = Posicion(move.to.row -1,move.to.column -1)
-//        println("" + from.x + "," + from.y + " to " + to.x + "," + to.y)
-//        println(tablero.obtenerPieza(from).nombre)
         val nextColor : PlayerColor = if (jugadores[turno].color == WHITE) BLACK else WHITE
         for (validador in validadores){
             var result : ResultSet = validador.validarJuego(from,to, tablero, jugadores[turno] )
-//            println(result.explanation)
+            if (result.win){
+                return GameOver(jugadores[turno].color)
+            }
             if (result.invalid){
                 return InvalidMove(result.explanation)
             }
             if (result.returnable == true){
                 tablero = result.tablero
                 turno = (turno + 1) % jugadores.size
-//                println("Movimiento realizado")
-//                println(tablero.imprimirTablero())
                 return NewGameState(Conection.adaptPieces(result.tablero), nextColor)
             }
         }

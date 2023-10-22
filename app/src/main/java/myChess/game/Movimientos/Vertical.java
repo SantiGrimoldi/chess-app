@@ -46,7 +46,7 @@ public class Vertical implements Movimiento{
         if (y0 != y1) return false;
         int diffX = x0 < x1 ? 1 : -1;
         for (int i = x0 + diffX ; i != x1; i += diffX) {
-            if (tablero.tienePieza(new Posicion(i, y0))) throw new IllegalArgumentException("Hay una pieza en el camino, posición: " + i + ", " + y0);
+            if (tablero.tienePieza(new Posicion(i, y0))) return false;
         }
         return true;
     }

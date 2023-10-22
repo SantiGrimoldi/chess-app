@@ -42,10 +42,6 @@ public class Tablero {
         return tablero.get(posicion.getX()).get(posicion.getY());
     }
 
-//    public Tablero moverPieza (Posicion posicionInicial, Posicion posicionFinal) {
-//        Pieza pieza = obtenerPieza(posicionInicial);
-//        return createSiguienteTablero(posicionInicial, posicionFinal, pieza);
-//    }
 
     public Tablero moverPieza(Posicion posicionInicial, Posicion posicionFinal, Pieza pieza) {
         List<List<Pieza>> nuevaLista = clonar();

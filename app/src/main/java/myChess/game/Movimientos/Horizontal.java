@@ -38,15 +38,16 @@ public class Horizontal implements Movimiento{
         return x0 == x1 && y0 != y1;
     }
 
-    public boolean caminoLibre(Posicion posicionInicial, Posicion posicionFinal, Tablero tablero) throws IllegalArgumentException {
+    public boolean caminoLibre(Posicion posicionInicial, Posicion posicionFinal, Tablero tablero)  {
         int y0 = posicionInicial.getY();
         int y1 = posicionFinal.getY();
         int x = posicionInicial.getX();
         int diffY = y0 < y1 ? 1 : -1;
         if (Math.abs(y0 - y1) > distancia) return false;
         for (int i = y0 + diffY; i != y1; i += diffY) {
-            if (tablero.tienePieza(new Posicion(x, i))) throw new IllegalArgumentException("Hay una pieza en el camino, posición: " + x + ", " + i);
+            if (tablero.tienePieza(new Posicion(x, i))) return false;
         }
         return true;
     }
+
 }

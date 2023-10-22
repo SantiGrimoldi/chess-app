@@ -11,6 +11,9 @@ public class ValidadorMoverTuPieza implements ValidadorDeJuego{
         if (tablero.tienePieza(posicionInicial) && tablero.obtenerPieza(posicionInicial).getOwner().getColor() != usuario.getColor()) {
             return new ResultSet(tablero, "No es tu pieza", false, true);
         }
+        if (!tablero.tienePieza(posicionInicial)) {
+            return new ResultSet(tablero, "No hay pieza en el casillero inicial", false, true);
+        }
         return new ResultSet(tablero, "Es tu pieza", false, false);
     }
 }

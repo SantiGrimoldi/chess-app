@@ -49,7 +49,7 @@ public class Diagonal implements Movimiento{
         int diffX = x0 < x1 ? 1 : -1;
         int diffY = y0 < y1 ? 1 : -1;
         for (int i = x0 + diffX, j = y0 + diffY; i != x1 && j!= y1; i += diffX, j += diffY) {
-            if (tablero.tienePieza(new Posicion(i, j))) throw new IllegalArgumentException("Hay una pieza en el camino, posición: " + i + ", " + j);
+            if (tablero.tienePieza(new Posicion(i, j))) return false;
         }
         return true;
     }
