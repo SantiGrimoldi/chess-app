@@ -37,7 +37,7 @@ public class Diagonal implements Movimiento{
         int y1 = posicionFinal.getY();
         int diffX = Math.abs(x0 - x1);
         int diffY = Math.abs(y0 - y1);
-        return diffY == diffX;
+        return diffY == diffX && distancia >= diffX;
     }
 
     public boolean caminoLibre(Posicion posicionInicial, Posicion posicionFinal, Tablero tablero) {

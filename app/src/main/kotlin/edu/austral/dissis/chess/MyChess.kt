@@ -7,8 +7,8 @@ import myChess.game.movimientosEspeciales.MovimientosEspeciales
 import java.util.stream.IntStream.range
 
 class MyThings()  {
-    var board: Tablero = Tablero(8, 8)
-    val playersList: MutableList<User> = ArrayList()
+    private var board: Tablero = Tablero(8, 8)
+    private val playersList: MutableList<User> = ArrayList()
 
     init {
         val player1 = User("Player 1", PlayerColor.WHITE)

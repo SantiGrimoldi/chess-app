@@ -20,6 +20,7 @@ public class ValidadorMovimientosEspeciales implements ValidadorDeJuego{
         for (MovimientoEspecial movimientoEspecial : movimientosEspeciales) {
             Tablero tableroAux = movimientoEspecial.MovimientoEspecial(tablero.obtenerPieza(posicionInicial), posicionInicial, posicionFinal, tablero);
             if (tableroAux != tablero) {
+                System.out.println(tableroAux.imprimirTablero());
                 return new ResultSet(tableroAux, "Movimiento especial valido", true, false);
             }
         }

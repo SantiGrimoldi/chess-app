@@ -4,27 +4,44 @@ import myChess.game.Pieza;
 import myChess.game.Posicion;
 import myChess.game.Tablero;
 
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class Transformaciones implements MovimientoEspecial{
 
     Pieza piezaActual;
     Pieza proximaPieza;
+    int row;
+
+    public Transformaciones(Pieza piezaActual, Pieza proximaPieza, int row) {
+        this.piezaActual = piezaActual;
+        this.proximaPieza = proximaPieza;
+        this.row = row;
+    }
 
     @Override
-    public Tablero MovimientoEspecial(Pieza pieza, Posicion inicial, Posicion post, Tablero tablero) {
-        if (pieza.movimientoValido(inicial, post, tablero) && isPiezaIntercambiable(pieza)) {
-            return actualizarTablero(inicial, post, tablero);
+    public Tablero MovimientoEspecial(Pieza piece, Posicion inicial, Posicion post, Tablero tablero) {
+        Map<Posicion, Pieza> piezas = tablero.getTodasLasPiezas();
+        AtomicBoolean isPiezaIntercambiable = new AtomicBoolean(false);
+        piezas.forEach((posicion, pieza) -> {
+            if (posicion.getX() == row && isPiezaIntercambiable(pieza)) {
+                proximaPieza = proximaPieza.setId(pieza.getId());
+                isPiezaIntercambiable.set(true);
+            }
+        });
+        if (isPiezaIntercambiable.get()) {
+            return actualizarTablero(post, tablero);
         }
         return tablero;
     }
 
-    private Tablero actualizarTablero (Posicion inicial, Posicion post, Tablero tablero) {
-        tablero = tablero.forzarMovimiento(proximaPieza, post);
-        tablero = tablero.eliminarPieza(inicial);
-        return tablero;
+    private Tablero actualizarTablero ( Posicion post, Tablero tablero) {
+        return tablero.forzarMovimiento(proximaPieza, post);
     }
 
     private boolean isPiezaIntercambiable(Pieza pieza) {
         return pieza.getMovimientosEspeciales().contains(MovimientosEspeciales.PRIMERO) &&
                 piezaActual.equals(pieza);
+
     }
 }

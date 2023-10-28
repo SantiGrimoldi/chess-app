@@ -3,7 +3,7 @@ package myChess.game.validadoresDeJuego;
 import myChess.game.Tablero;
 
 public class ResultSet {
-    private final Tablero tablero;
+    private Tablero tablero;
     private final String Explanation;
     private final Boolean returnable;
     private final Boolean invalid;
@@ -29,7 +29,6 @@ public class ResultSet {
     public Tablero getTablero() {
         return tablero;
     }
-
     public String getExplanation() {
         return Explanation;
     }
@@ -44,5 +43,9 @@ public class ResultSet {
 
     public Boolean getWin() {
         return win;
+    }
+
+    public void setTablero(Tablero tablero) {
+        this.tablero = tablero;
     }
 }

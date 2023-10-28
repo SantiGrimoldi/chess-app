@@ -86,8 +86,12 @@ public class Pieza {
     }
 
     public boolean equals(Pieza pieza) {
-        return  this.owner == pieza.getOwner() &&
+        return  this.owner.getColor() == pieza.getOwner().getColor() &&
                 this.movimientos.containsAll(pieza.getMovimientos()) &&
                 this.piezaGanadora == pieza.isPiezaGanadora();
+    }
+
+    public Pieza setId(String id) {
+        return new Pieza(this.nombre, this.movimientos, this.owner, this.piezaGanadora, this.movimientosEspeciales, id);
     }
 }

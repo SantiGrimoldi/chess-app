@@ -29,6 +29,7 @@ public class Tablero {
     }
 
     public Boolean tienePieza (Posicion posicion) {
+        if (!estaDentoDeLosLimites(posicion)) return false;
         return tablero.get(posicion.getX()).get(posicion.getY()) != null;
     }
 
@@ -52,7 +53,7 @@ public class Tablero {
     }
 
     public boolean estaDentoDeLosLimites(Posicion posicion) {
-        return getFilas() > posicion.getX() && getColumnas() > posicion.getY();
+        return getFilas() > posicion.getX() && getColumnas() > posicion.getY() && posicion.getX() >= 0 && posicion.getY() >= 0;
     }
 
     public Tablero forzarMovimiento(Pieza pieza, Posicion posicionFinal) {
