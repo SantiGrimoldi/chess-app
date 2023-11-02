@@ -1,7 +1,6 @@
 package edu.austral.dissis.chess
 
-import myChess.game.Posicion
-import myChess.game.validadoresDeJuego.ValidadorMovimientosNormales
+import common.validadoresDeJuego.ValidadorMovimientosNormales
 
 
 fun main() {

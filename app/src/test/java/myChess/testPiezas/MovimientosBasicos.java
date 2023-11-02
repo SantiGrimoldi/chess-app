@@ -1,12 +1,11 @@
 package myChess.testPiezas;
 
 import edu.austral.dissis.chess.MyThings;
-import myChess.game.Posicion;
-import myChess.game.Tablero;
+import common.Posicion;
+import common.Tablero;
 import myChess.game.reglas.Jaque;
-import myChess.game.validadoresDeJuego.ValidadorDeJuego;
-import myChess.game.validadoresDeJuego.ValidadorMovimientosNormales;
-import myChess.game.validadoresDeJuego.ValidadorReglasJuego;
+import common.validadoresDeJuego.ValidadorDeJuego;
+import common.validadoresDeJuego.ValidadorReglasJuego;
 
 import java.util.List;
 

@@ -1,11 +1,16 @@
 package myChess.game.movimientosEspeciales;
 
-import myChess.game.*;
-import myChess.game.Movimientos.Vertical;
+import common.Movimientos.MovimientosEspeciales;
+import common.NombrePieza;
+import common.interfaces.MovimientoEspecial;
+import common.Pieza;
+import common.Posicion;
+import common.Tablero;
+import common.Movimientos.Vertical;
 
 import java.util.List;
 
-public class PrimeroPeon implements MovimientoEspecial{
+public class PrimeroPeon implements MovimientoEspecial {
     @Override
     public Tablero MovimientoEspecial(Pieza pieza, Posicion inicial, Posicion post, Tablero tablero) {
         if (!pieza.getMovimientosEspeciales().contains(MovimientosEspeciales.PRIMERO)) return tablero;

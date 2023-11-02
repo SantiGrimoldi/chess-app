@@ -1,15 +1,15 @@
 package myChess.testIntegral;
 
+import common.*;
 import edu.austral.dissis.chess.gui.PlayerColor;
-import myChess.game.*;
-import myChess.game.Movimientos.Diagonal;
-import myChess.game.Movimientos.Horizontal;
-import myChess.game.Movimientos.UnCuadrado;
-import myChess.game.Movimientos.Vertical;
+import common.Movimientos.Diagonal;
+import common.Movimientos.Horizontal;
+import common.Movimientos.UnCuadrado;
+import common.Movimientos.Vertical;
 import myChess.game.condicionesGanadoras.JaqueMate;
-import myChess.game.validadoresDeJuego.ResultSet;
-import myChess.game.validadoresDeJuego.ValidadorDeJuego;
-import myChess.game.validadoresDeJuego.ValidadorGanarJuego;
+import common.validadoresDeJuego.ResultSet;
+import common.validadoresDeJuego.ValidadorDeJuego;
+import common.validadoresDeJuego.ValidadorGanarJuego;
 
 import java.util.ArrayList;
 import java.util.List;

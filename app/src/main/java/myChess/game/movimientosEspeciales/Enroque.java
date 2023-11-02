@@ -1,9 +1,11 @@
 package myChess.game.movimientosEspeciales;
 
-import myChess.game.NombrePieza;
-import myChess.game.Pieza;
-import myChess.game.Posicion;
-import myChess.game.Tablero;
+import common.Movimientos.MovimientosEspeciales;
+import common.interfaces.MovimientoEspecial;
+import common.NombrePieza;
+import common.Pieza;
+import common.Posicion;
+import common.Tablero;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

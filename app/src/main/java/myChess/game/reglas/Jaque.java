@@ -1,10 +1,11 @@
 package myChess.game.reglas;
 
+import common.interfaces.ReglasJuegoMovimiento;
 import edu.austral.dissis.chess.gui.PlayerColor;
-import myChess.game.Pieza;
-import myChess.game.Posicion;
-import myChess.game.Tablero;
-import myChess.game.User;
+import common.Pieza;
+import common.Posicion;
+import common.Tablero;
+import common.User;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class Jaque implements ReglasJuegoMovimiento {
         for (int i = 0; i< tablero.getFilas(); i++){
             for (int j = 0; j< tablero.getColumnas(); j++){
                 Posicion posicion = new Posicion(i,j);
-                if (tablero.tienePieza(posicion) && tablero.obtenerPieza(posicion).getOwner().getColor() != jugador) {
+                if (tablero.tienePieza(posicion) && tablero.obtenerPieza(posicion).getColor() != jugador) {
                     if (Jaque.jaque(posicion, rey, tablero)) {
                         return true;
                     }
@@ -38,13 +39,13 @@ public class Jaque implements ReglasJuegoMovimiento {
         return false;
     }
 
-    public boolean salgoDeJaque (Posicion posicionInicial, Posicion posicionFinal, Tablero tablero, User jugador) {
+    public boolean salgoDeJaque (Posicion posicionInicial, Posicion posicionFinal, Tablero tablero, PlayerColor jugador) {
         Tablero tableroAux = tablero.moverPieza(posicionInicial, posicionFinal, tablero.obtenerPieza(posicionInicial));
-        List<Posicion> reyes = tableroAux.reyes(jugador);
+        List<Posicion> reyes = tableroAux.reyes();
         if (reyes.isEmpty())  return true;
         for (Posicion rey : reyes) {
-            if (tableroAux.obtenerPieza(rey).getOwner().getColor() == jugador.getColor()) {
-                return !estoyEnJaque(rey, tableroAux, jugador.getColor());
+            if (tableroAux.obtenerPieza(rey).getColor() == jugador) {
+                return !estoyEnJaque(rey, tableroAux, jugador);
             }
         }
         return false;
@@ -53,6 +54,6 @@ public class Jaque implements ReglasJuegoMovimiento {
 
     @Override
     public boolean movValidoJuego(Posicion inicial, Posicion post, Tablero tablero, User user) {
-        return salgoDeJaque(inicial, post, tablero, user);
+        return salgoDeJaque(inicial, post, tablero, user.getColor());
     }
 }
