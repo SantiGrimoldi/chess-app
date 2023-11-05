@@ -1,6 +1,7 @@
-package myChess.game.reglas;
+package myChess.game.validadoresDeJuego;
 
-import common.interfaces.ReglasJuegoMovimiento;
+import common.validadoresDeJuego.ResultSet;
+import common.validadoresDeJuego.ValidadorDeJuego;
 import edu.austral.dissis.chess.gui.PlayerColor;
 import common.Pieza;
 import common.Posicion;
@@ -9,7 +10,7 @@ import common.User;
 
 import java.util.List;
 
-public class Jaque implements ReglasJuegoMovimiento {
+public class Jaque implements ValidadorDeJuego {
     public static Boolean jaque (Posicion posPieza, Posicion posRey, Tablero tablero) {
         try{
             if (!tablero.tienePieza(posPieza)) return false;
@@ -52,8 +53,16 @@ public class Jaque implements ReglasJuegoMovimiento {
     }
 
 
+
+    public boolean movValidoJuego(Posicion inicial, Posicion post, Tablero tablero, PlayerColor color) {
+        return salgoDeJaque(inicial, post, tablero, color);
+    }
+
     @Override
-    public boolean movValidoJuego(Posicion inicial, Posicion post, Tablero tablero, User user) {
-        return salgoDeJaque(inicial, post, tablero, user.getColor());
+    public ResultSet validarJuego(Posicion posicionInicial, Posicion posicionFinal, Tablero tablero, PlayerColor color) {
+        if (movValidoJuego(posicionInicial, posicionFinal, tablero, color)) {
+            return new ResultSet(tablero, "Movimiento valido", false, false);
+        }
+        return new ResultSet(tablero, "Estas en jaque o pieza pineada", false, true);
     }
 }

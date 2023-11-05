@@ -17,14 +17,8 @@ class MyCheckers : GameEngine {
     private var tablero: Tablero = Tablero(8, 8)
     private val jugadores: MutableList<User> = ArrayList()
     private var turno = 0
-    private val validadores : MutableList<ValidadorDeJuego> =
-        listOf(
-
-            ValidadorMoverTuPieza(),
-            ValidadorPuedeComer(),
-            ValidadorMovimientoDama()
-            ).toMutableList()
-    private val especiales : MutableList<ValidadorDeJuego> = ArrayList()
+    private val validador : ValidadorDeJuego = CheckersFactory().classicCheckersValidator()
+//    private val especiales : MutableList<ValidadorDeJuego> = ArrayList()
     private val winningValidator = ValidadorGanarDamas()
 
     override fun applyMove(move: Move): MoveResult {
@@ -35,58 +29,45 @@ class MyCheckers : GameEngine {
     }
 
     private fun validateMovement(from: Posicion, to: Posicion, nextColor: PlayerColor): MoveResult {
-        for (validador in validadores) {
-            var result: ResultSet = validador.validarJuego(from, to, tablero, jugadores[turno])
+            var result: ResultSet = validador.validarJuego(from, to, tablero, jugadores[turno].color)
             if (result.returnable) {
                 tablero = result.tablero
-                var specialResult = specialMove(from, to)
-                result.tablero = specialResult.tablero
-                if (specialResult.invalid){
-                    result = specialResult
-                }
-                if (checkWin(from, to, result)) return GameOver(jugadores[turno].color)
+                if (result.win) return GameOver(jugadores[turno].color)
                 return returnResult(result, nextColor)
             }
             if (result.invalid) return InvalidMove(result.explanation)
-        }
         return InvalidMove("No se pudo realizar el movimiento")
     }
 
-    private fun checkWin(from: Posicion,to: Posicion,result: ResultSet): Boolean {
-      return  winningValidator.validarJuego(from, to, result.tablero, jugadores[(turno + 1) % jugadores.size]).win
-    }
-    private fun returnResult(
-        result: ResultSet,
-        nextColor: PlayerColor
-    ): NewGameState {
-        if (result.invalid) return NewGameState(UIAdapter.adaptPieces(result.tablero), jugadores[turno].color)
+    private fun returnResult(result: ResultSet,nextColor: PlayerColor): NewGameState {
+        if (result.keepTurn()) return NewGameState(UIAdapter.adaptPieces(result.tablero), jugadores[turno].color)
         turno = (turno + 1) % jugadores.size
         return NewGameState(UIAdapter.adaptPieces(result.tablero), nextColor)
     }
 
-    private fun specialMove(from: Posicion, to: Posicion) : ResultSet {
-        for (especial in especiales) {
-            val tableroaux = especial.validarJuego(from, to, tablero, jugadores[turno]).tablero
-            if (tableroaux != tablero) {
-                tablero = tableroaux
-                if (ValidadorPuedeComer.verSiPuedoComer(tablero, jugadores[turno].color).invalid) {
-                    return ResultSet(
-                        tablero,
-                        "Rey puede comer",
-                        true,
-                        true
-                    )
-                }
-                return ResultSet(
-                    tablero,
-                    "Rey no puede comer",
-                    true,
-                    false
-                )
-            }
-        }
-        return ResultSet(tablero, "", false, false)
-    }
+//    private fun specialMove(from: Posicion, to: Posicion) : ResultSet {
+//        for (especial in especiales) {
+//            val tableroaux = especial.validarJuego(from, to, tablero, jugadores[turno].color).tablero
+//            if (tableroaux != tablero) {
+//                tablero = tableroaux
+//                if (ValidadorPuedeComer.verSiPuedoComer(tablero, jugadores[turno].color).invalid) {
+//                    return ResultSet(
+//                        tablero,
+//                        "Rey puede comer",
+//                        true,
+//                        true
+//                    )
+//                }
+//                return ResultSet(
+//                    tablero,
+//                    "Rey no puede comer",
+//                    true,
+//                    false
+//                )
+//            }
+//        }
+//        return ResultSet(tablero, "", false, false)
+//    }
 
     override fun init(): InitialState {
         return InitialState(
@@ -131,41 +112,5 @@ class MyCheckers : GameEngine {
                 }
             }
         }
-        val blancaActual : Pieza = tablero.obtenerPieza(
-            Posicion(
-                0,
-                0
-            )
-        )!!
-        val negraActual : Pieza = tablero.obtenerPieza(
-            Posicion(
-                7,
-                7
-            )
-        )!!
-        val reyBlanca = Pieza(NombrePieza.REY, listOf(Dama(true)), player1, "r1")
-        val reyNegra = Pieza(NombrePieza.REY, listOf(Dama(true)), player2, "r2")
-        especiales.add(
-            ValidadorMovimientosEspeciales(
-                listOf(
-                    Transformaciones(
-                        blancaActual,
-                        reyBlanca,
-                        7
-                    )
-                )
-            )
-        )
-        especiales.add(
-            ValidadorMovimientosEspeciales(
-                listOf(
-                    Transformaciones(
-                        negraActual,
-                        reyNegra,
-                        0
-                    )
-                )
-            )
-        )
     }
 }

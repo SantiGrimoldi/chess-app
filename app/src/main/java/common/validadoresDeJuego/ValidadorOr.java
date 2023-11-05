@@ -2,7 +2,7 @@ package common.validadoresDeJuego;
 
 import common.Posicion;
 import common.Tablero;
-import common.User;
+import edu.austral.dissis.chess.gui.PlayerColor;
 
 import java.util.List;
 
@@ -14,10 +14,10 @@ public class ValidadorOr implements ValidadorDeJuego{
         this.validadores = validadores;
     }
     @Override
-    public ResultSet validarJuego(Posicion posicionInicial, Posicion posicionFinal, Tablero tablero, User usuario) {
+    public ResultSet validarJuego(Posicion posicionInicial, Posicion posicionFinal, Tablero tablero, PlayerColor color) {
         for (ValidadorDeJuego validador : validadores) {
-            ResultSet resultSet = validador.validarJuego(posicionInicial, posicionFinal, tablero, usuario);
-            if (resultSet.getReturnable()) {
+            ResultSet resultSet = validador.validarJuego(posicionInicial, posicionFinal, tablero, color);
+            if (resultSet.getReturnable() || resultSet.getWin()) {
                 return resultSet;
             }
         }

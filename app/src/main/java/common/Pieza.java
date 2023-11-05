@@ -87,8 +87,8 @@ public class Pieza {
     }
 
     public boolean equals(Pieza pieza) {
-        return  this.owner.getColor() == pieza.getOwner().getColor() &&
-                this.movimientos.containsAll(pieza.getMovimientos()) &&
+        return  this.owner.getColor() == pieza.getColor() &&
+                this.nombre == pieza.getNombre() &&
                 this.piezaGanadora == pieza.isPiezaGanadora();
     }
 

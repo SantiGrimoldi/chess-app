@@ -6,15 +6,13 @@ import edu.austral.dissis.chess.gui.PlayerColor;
 import common.Pieza;
 import common.Posicion;
 import common.Tablero;
-import common.User;
 
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ValidadorGanarDamas implements ValidadorDeJuego {
     @Override
-    public ResultSet validarJuego(Posicion posicionInicial, Posicion posicionFinal, Tablero tablero, User usuario) {
-        PlayerColor color = usuario.getColor();
+    public ResultSet validarJuego(Posicion posicionInicial, Posicion posicionFinal, Tablero tablero, PlayerColor color) {
         Map<Posicion, Pieza> piezas = tablero.getTodasLasPiezas();
         piezas = piezas.entrySet().stream().filter((entry) -> entry.getValue().getColor() == color).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
         if (puedeMover(piezas, tablero)) {

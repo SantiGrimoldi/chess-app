@@ -2,8 +2,8 @@ package common.validadoresDeJuego;
 
 import common.Posicion;
 import common.Tablero;
-import common.User;
 import common.interfaces.MovimientoEspecial;
+import edu.austral.dissis.chess.gui.PlayerColor;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public class ValidadorMovimientosEspeciales implements ValidadorDeJuego{
     }
 
     @Override
-    public ResultSet validarJuego(Posicion posicionInicial, Posicion posicionFinal, Tablero tablero, User usuario) {
+    public ResultSet validarJuego(Posicion posicionInicial, Posicion posicionFinal, Tablero tablero, PlayerColor color) {
         for (MovimientoEspecial movimientoEspecial : movimientosEspeciales) {
             Tablero tableroAux = movimientoEspecial.MovimientoEspecial(tablero.obtenerPieza(posicionInicial), posicionInicial, posicionFinal, tablero);
             if (tableroAux != tablero) {

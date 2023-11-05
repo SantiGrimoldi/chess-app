@@ -6,17 +6,16 @@ import edu.austral.dissis.chess.gui.PlayerColor;
 import common.Pieza;
 import common.Posicion;
 import common.Tablero;
-import common.User;
 
 public class ValidadorPuedeComer implements ValidadorDeJuego {
     @Override
-    public ResultSet validarJuego(Posicion posicionInicial, Posicion posicionFinal, Tablero tablero, User usuario) {
+    public ResultSet validarJuego(Posicion posicionInicial, Posicion posicionFinal, Tablero tablero, PlayerColor color) {
         int diffX = Math.abs(posicionFinal.getX() - posicionInicial.getX());
         if (diffX > 1) {
             return new ResultSet(tablero,"movimiento valido", false, false);
         }
         else {
-            return verSiPuedoComer(tablero, usuario.getColor());
+            return verSiPuedoComer(tablero, color);
         }
     }
 

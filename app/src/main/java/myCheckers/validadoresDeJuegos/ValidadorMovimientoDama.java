@@ -6,25 +6,26 @@ import common.Pieza;
 import common.Posicion;
 import common.Tablero;
 import common.User;
+import edu.austral.dissis.chess.gui.PlayerColor;
 
 public class ValidadorMovimientoDama implements ValidadorDeJuego {
     @Override
-    public ResultSet validarJuego(Posicion posicionInicial, Posicion posicionFinal, Tablero tablero, User usuario) {
+    public ResultSet validarJuego(Posicion posicionInicial, Posicion posicionFinal, Tablero tablero, PlayerColor color) {
         if (tablero.tienePieza(posicionFinal)) return new ResultSet(tablero, "No podes mover ahi", false, false);
         if (tablero.tienePieza(posicionInicial)) {
-            return validarMovimiento(posicionInicial, posicionFinal, tablero, usuario);
+            return validarMovimiento(posicionInicial, posicionFinal, tablero, color);
         }
         return new ResultSet(tablero, "No hay pieza en la posicion inicial", false, true);
     }
 
-    private ResultSet validarMovimiento(Posicion posicionInicial, Posicion posicionFinal, Tablero tablero, User usuario) {
+    private ResultSet validarMovimiento(Posicion posicionInicial, Posicion posicionFinal, Tablero tablero, PlayerColor color) {
         Pieza pieza = tablero.obtenerPieza(posicionInicial);
         if (pieza.movimientoValido(posicionInicial, posicionFinal, tablero)){
             tablero = tablero.moverPieza(posicionInicial, posicionFinal, pieza);
             tablero = cleanDiagonal(posicionInicial, posicionFinal, tablero);
             int diffX = Math.abs(posicionFinal.getX() - posicionInicial.getX());
-            if (diffX == 2 && ValidadorPuedeComer.verSiPuedoComer(tablero, usuario.getColor()).getInvalid()) {
-                return new ResultSet(tablero, "Sigue jugando", true, true);
+            if (diffX == 2 && ValidadorPuedeComer.verSiPuedoComer(tablero, color).getInvalid()) {
+                return new ResultSet(tablero, "Sigue jugando", true, false, true);
             }
             return new ResultSet(tablero, "Segui jugando", true, false);
         }

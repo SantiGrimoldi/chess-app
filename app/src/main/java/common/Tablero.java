@@ -111,7 +111,7 @@ public class Tablero {
         return piezas;
     }
 
-//    private String imprimirTablero(){
+//    public String imprimirTablero(){
 //        String tableroString = "";
 //        for (int i=0; i<tablero.size();i++){
 //            for (int j=0; j<tablero.get(i).size();j++){

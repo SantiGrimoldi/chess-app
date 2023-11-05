@@ -2,12 +2,12 @@ package common.validadoresDeJuego;
 
 import common.Posicion;
 import common.Tablero;
-import common.User;
+import edu.austral.dissis.chess.gui.PlayerColor;
 
 public class ValidadorMoverTuPieza implements ValidadorDeJuego{
     @Override
-    public ResultSet validarJuego(Posicion posicionInicial, Posicion posicionFinal, Tablero tablero, User usuario) {
-        if (tablero.tienePieza(posicionInicial) && tablero.obtenerPieza(posicionInicial).getColor() != usuario.getColor()) {
+    public ResultSet validarJuego(Posicion posicionInicial, Posicion posicionFinal, Tablero tablero, PlayerColor color) {
+        if (tablero.tienePieza(posicionInicial) && tablero.obtenerPieza(posicionInicial).getColor() != color) {
             return new ResultSet(tablero, "No es tu pieza", false, true);
         }
         if (!tablero.tienePieza(posicionInicial)) {

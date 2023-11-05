@@ -1,53 +1,35 @@
-package myChess.game.condicionesGanadoras;
+package myChess.game.validadoresDeJuego;
 
-import common.interfaces.CondicionGanadora;
+import common.validadoresDeJuego.ResultSet;
+import common.validadoresDeJuego.ValidadorDeJuego;
 import edu.austral.dissis.chess.gui.PlayerColor;
 import common.Pieza;
 import common.Posicion;
 import common.Tablero;
 import common.User;
-import myChess.game.reglas.Jaque;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
-public class JaqueMate implements CondicionGanadora {
+public class JaqueMate implements ValidadorDeJuego {
     Jaque jaque = new Jaque();
 
     @Override
-    public boolean condicionGanadora(Posicion incial, Posicion destino, Tablero tablero, User usuario) {
-        PlayerColor color = usuario.getColor() == PlayerColor.WHITE ? PlayerColor.BLACK : PlayerColor.WHITE;
-        Posicion posRey = tablero.reyes().stream().filter((pos) -> tablero.obtenerPieza(pos).getColor() == color).toList().get(0);
+    public ResultSet validarJuego(Posicion posicionInicial, Posicion posicionFinal, Tablero tablero, PlayerColor color) {
+        color = color == PlayerColor.WHITE ? PlayerColor.BLACK : PlayerColor.WHITE;
+        Posicion posRey = getPosRey(tablero, color);
         if (jaque.estoyEnJaque(posRey, tablero, color)) {
-            if (reySalvaJaque(posRey, tablero, color)) {
-                return false;
-            }
-            else return !piezaSalvaJaque(tablero, color);
-        }
-        return false;
-    }
-
-    private boolean reySalvaJaque(Posicion posRey, Tablero tablero, PlayerColor usuario) {
-        Pieza rey = tablero.obtenerPieza(posRey);
-        for (int i = 0; i< tablero.getFilas(); i++){
-            for (int j = 0; j< tablero.getColumnas(); j++){
-                Posicion posicion = new Posicion(i,j);
-                if (
-                        jaque.salgoDeJaque(posRey, posicion, tablero, usuario) &&
-                                rey.movimientoValido(posRey, posicion, tablero) &&
-                                destinoDisponible(tablero, usuario, posicion)) {
-                    return true;
-                }
+            if (!piezaSalvaJaque(tablero, color)){
+                return new ResultSet(true,tablero,"Jaque Mate");
             }
         }
-        return false;
+        return new ResultSet( tablero,"No estas en jaque", false, false);
     }
 
-    private static boolean destinoDisponible(Tablero tablero, PlayerColor usuario, Posicion posicion) {
-        return !tablero.tienePieza(posicion) || tablero.tienePieza(posicion)
-                && tablero.obtenerPieza(posicion).getColor() != usuario;
+    private static Posicion getPosRey(Tablero tablero, PlayerColor color) {
+        return tablero.reyes().stream().filter((pos) -> tablero.obtenerPieza(pos).getColor() == color).toList().get(0);
     }
 
     private boolean piezaSalvaJaque( Tablero tablero, PlayerColor color){
@@ -76,11 +58,12 @@ public class JaqueMate implements CondicionGanadora {
 
     @NotNull
     private static Map<Posicion, Pieza> obtenerLasPiezasDeMiColor(PlayerColor color, Map<Posicion, Pieza> piezas) {
-        return piezas.entrySet().stream().filter((entry) -> entry.getValue().getColor() == color && !entry.getValue().isPiezaGanadora()).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        return piezas.entrySet().stream().filter((entry) -> entry.getValue().getColor() == color).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
     private static boolean isEmptyOrHasOpponentPiece(Tablero tablero, PlayerColor usuario, Posicion posicion) {
         return (tablero.tienePieza(posicion) && tablero.obtenerPieza(posicion).getColor() != usuario) || !tablero.tienePieza(posicion);
     }
+
 
 }

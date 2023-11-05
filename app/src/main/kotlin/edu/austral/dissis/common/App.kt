@@ -4,6 +4,7 @@
 package edu.austral.dissis.common
 
 import edu.austral.dissis.checkers.MyCheckers
+import edu.austral.dissis.chess.Mychess
 import edu.austral.dissis.chess.gui.CachedImageResolver
 import edu.austral.dissis.chess.gui.DefaultImageResolver
 import edu.austral.dissis.chess.gui.GameView
