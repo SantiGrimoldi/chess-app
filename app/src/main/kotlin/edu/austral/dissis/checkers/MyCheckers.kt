@@ -19,12 +19,13 @@ class MyCheckers : GameEngine {
     private var turno = 0
     private val validadores : MutableList<ValidadorDeJuego> =
         listOf(
-            ValidadorGanarDamas(),
+
             ValidadorMoverTuPieza(),
             ValidadorPuedeComer(),
             ValidadorMovimientoDama()
             ).toMutableList()
     private val especiales : MutableList<ValidadorDeJuego> = ArrayList()
+    private val winningValidator = ValidadorGanarDamas()
 
     override fun applyMove(move: Move): MoveResult {
         val from  = Posicion(move.from.row - 1, move.from.column - 1)
@@ -36,7 +37,6 @@ class MyCheckers : GameEngine {
     private fun validateMovement(from: Posicion, to: Posicion, nextColor: PlayerColor): MoveResult {
         for (validador in validadores) {
             var result: ResultSet = validador.validarJuego(from, to, tablero, jugadores[turno])
-            if (result.win) return GameOver(jugadores[(turno + 1) % jugadores.size].color)
             if (result.returnable) {
                 tablero = result.tablero
                 var specialResult = specialMove(from, to)
@@ -44,6 +44,7 @@ class MyCheckers : GameEngine {
                 if (specialResult.invalid){
                     result = specialResult
                 }
+                if (checkWin(from, to, result)) return GameOver(jugadores[turno].color)
                 return returnResult(result, nextColor)
             }
             if (result.invalid) return InvalidMove(result.explanation)
@@ -51,6 +52,9 @@ class MyCheckers : GameEngine {
         return InvalidMove("No se pudo realizar el movimiento")
     }
 
+    private fun checkWin(from: Posicion,to: Posicion,result: ResultSet): Boolean {
+      return  winningValidator.validarJuego(from, to, result.tablero, jugadores[(turno + 1) % jugadores.size]).win
+    }
     private fun returnResult(
         result: ResultSet,
         nextColor: PlayerColor
