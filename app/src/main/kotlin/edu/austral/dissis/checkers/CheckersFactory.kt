@@ -1,11 +1,8 @@
 package edu.austral.dissis.checkers
 
-import common.NombrePieza
-import common.Pieza
-import common.Transformaciones
-import common.User
+import common.*
+import common.Movimientos.MovimientosEspeciales
 import common.validadoresDeJuego.ValidadorAnd
-import common.validadoresDeJuego.ValidadorCasilleroFinal
 import common.validadoresDeJuego.ValidadorDeJuego
 import common.validadoresDeJuego.ValidadorMoverTuPieza
 import common.validadoresDeJuego.ValidadorMovimientosEspeciales
@@ -13,12 +10,14 @@ import edu.austral.dissis.chess.gui.PlayerColor
 import myCheckers.Dama
 import myCheckers.validadoresDeJuegos.ValidadorGanarDamas
 import myCheckers.validadoresDeJuegos.ValidadorMovimientoDama
+import myCheckers.validadoresDeJuegos.ValidadorPosicionFinalDamas
 import myCheckers.validadoresDeJuegos.ValidadorPuedeComer
 
 class CheckersFactory {
     fun classicCheckersValidator () : ValidadorDeJuego {
         val movEsp = validadorMovsEsp()
-        val myV = ValidadorAnd(listOf(ValidadorMoverTuPieza(), ValidadorCasilleroFinal(), ValidadorPuedeComer(), ValidadorMovimientoDama(), movEsp, ValidadorGanarDamas()))
+        val myV = ValidadorAnd(listOf(ValidadorMoverTuPieza(),
+            ValidadorPosicionFinalDamas(), ValidadorPuedeComer(), ValidadorMovimientoDama(), movEsp, ValidadorGanarDamas()))
         return myV
     }
 
@@ -36,5 +35,49 @@ class CheckersFactory {
             )
         )
         return movEsp
+    }
+
+    fun createClassicalCheckers() : Tablero {
+        var tablero = Tablero(8, 8)
+        val (player1, player2) = createPlayers()
+        val movBlanco = Dama()
+        val movNegro = Dama(-1)
+        for (row in 0 until tablero.filas) {
+            // Recorre las columnas del tablero
+            for (col in 0 until tablero.columnas) {
+                // Inicializa las posiciones iniciales de las damas blancas en las primeras 3 filas
+                if (row < 3 && (col + row) % 2 == 0) {
+                    tablero = tablero.agregarPieza(
+                        Pieza(
+                            NombrePieza.REINA,
+                            listOf(movBlanco),
+                            player1,
+                            listOf(MovimientosEspeciales.PRIMERO),
+                            "" + col + row
+                        ), Posicion(row, col)
+                    )
+                }
+
+                // Inicializa las posiciones iniciales de las damas negras en las últimas 3 filas
+                if (row >= tablero.columnas - 3 && (col + row) % 2 == 0) {
+                    tablero = tablero.agregarPieza(
+                        Pieza(
+                            NombrePieza.REINA,
+                            listOf(movNegro),
+                            player2,
+                            listOf(MovimientosEspeciales.PRIMERO),
+                            "" + col + row
+                        ), Posicion(row, col)
+                    )
+                }
+            }
+        }
+        return tablero
+    }
+
+    fun createPlayers(): Pair<User, User> {
+        val player1 = User("Player 1", PlayerColor.WHITE)
+        val player2 = User("Player 2", PlayerColor.BLACK)
+        return Pair(player1, player2)
     }
 }

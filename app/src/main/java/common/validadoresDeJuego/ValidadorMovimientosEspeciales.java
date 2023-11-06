@@ -8,7 +8,7 @@ import edu.austral.dissis.chess.gui.PlayerColor;
 import java.util.List;
 
 public class ValidadorMovimientosEspeciales implements ValidadorDeJuego{
-    private List<MovimientoEspecial> movimientosEspeciales;
+    private final List<MovimientoEspecial> movimientosEspeciales;
 
     public ValidadorMovimientosEspeciales(List<MovimientoEspecial> movimientosEspeciales) {
         this.movimientosEspeciales = movimientosEspeciales;
