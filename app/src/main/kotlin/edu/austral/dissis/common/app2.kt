@@ -3,7 +3,7 @@ package edu.austral.dissis.common
 import edu.austral.dissis.chess.gui.CachedImageResolver
 import edu.austral.dissis.chess.gui.DefaultImageResolver
 import edu.austral.dissis.chess.gui.GameView
-import edu.austral.dissis.connection.client.ClientManager
+import edu.austral.dissis.connection.client.ClientHandler
 import edu.austral.ingsis.clientserver.netty.client.NettyClientBuilder
 import javafx.application.Application
 import javafx.application.Application.launch
@@ -18,7 +18,7 @@ class app2  :  Application() {
     private val imageResolver = CachedImageResolver(DefaultImageResolver())
     private val root = GameView(imageResolver)
     private val builder = NettyClientBuilder.createDefault()
-    private val client = ClientManager(root, builder)
+    private val client = ClientHandler(root, builder)
 
     override fun start(primaryStage: Stage) {
         primaryStage.title = "Client"

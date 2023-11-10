@@ -12,7 +12,7 @@ import edu.austral.ingsis.clientserver.Message
 import javafx.application.Platform
 import java.net.InetSocketAddress
 
-class ClientManager (private val gameView: GameView, private val builder : ClientBuilder) {
+class ClientHandler (private val gameView: GameView, private val builder : ClientBuilder) {
     private val messanger : Client
 
     init{

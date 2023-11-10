@@ -1,10 +1,9 @@
-package edu.austral.dissis.connection
+package edu.austral.dissis.connection.server
 
 import edu.austral.dissis.chess.gui.GameEventListener
 import edu.austral.dissis.chess.gui.Move
-import edu.austral.dissis.connection.server.ServerHandler
 
-class GameListener (private var serverHandler : ServerHandler) : GameEventListener {
+class ServerGameListener (private var serverHandler : ServerHandler) : GameEventListener {
     override fun handleMove(move: Move) {
         serverHandler.handleMove(move)
     }

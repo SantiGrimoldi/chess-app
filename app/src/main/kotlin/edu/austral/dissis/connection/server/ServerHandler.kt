@@ -4,7 +4,6 @@ package edu.austral.dissis.connection.server
 import com.fasterxml.jackson.core.type.TypeReference
 import edu.austral.dissis.chess.gui.*
 import edu.austral.dissis.common.GamesInterface
-import edu.austral.dissis.connection.GameListener
 import edu.austral.ingsis.clientserver.Message
 import edu.austral.ingsis.clientserver.Server
 import edu.austral.ingsis.clientserver.ServerBuilder
@@ -50,17 +49,17 @@ class ServerHandler (private val game:  GamesInterface, private val gameView: Ga
     }
 
     fun builder() : Server {
-        val gameListener = GameListener(this)
-        addstatesToGameView(gameListener)
+        val serverGameListener = ServerGameListener(this)
+        addstatesToGameView(serverGameListener)
         return builder
             .withPort(8080)
             .withConnectionListener(ClientConectsToServerListener(this))
-            .addMessageListener("move", object : TypeReference<Message<Move>>() {}, ServerMessageListener(gameListener))
+            .addMessageListener("move", object : TypeReference<Message<Move>>() {}, ServerMessageListener(serverGameListener))
             .build()
     }
 
-    fun addstatesToGameView(gameListener: GameListener) {
-        gameView.addListener(gameListener)
+    fun addstatesToGameView(serverGameListener: ServerGameListener) {
+        gameView.addListener(serverGameListener)
         gameView.handleInitialState(game.init())
     }
 
