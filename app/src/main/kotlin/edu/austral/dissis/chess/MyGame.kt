@@ -8,22 +8,15 @@ import edu.austral.dissis.chess.gui.PlayerColor.WHITE
 import common.Posicion
 import common.Tablero
 import common.User
-import myChess.game.validadoresDeJuego.JaqueMate
-import myChess.game.movimientosEspeciales.Enroque
-import myChess.game.movimientosEspeciales.PrimeroPeon
-import myChess.game.validadoresDeJuego.Jaque
 import common.validadoresDeJuego.ResultSet
 import common.validadoresDeJuego.ValidadorDeJuego
-import common.validadoresDeJuego.ValidadorMoverTuPieza
-import common.validadoresDeJuego.ValidadorMovimientosEspeciales
-import common.validadoresDeJuego.ValidadorMovimientosNormales
-import edu.austral.dissis.chess.MyThings
+import edu.austral.dissis.common.GamesInterface
 
-public class Mychess: GameEngine {
-    private var tablero : Tablero = MyThings().tablero
-    private var jugadores : ArrayList<User> = MyThings().jugadores as ArrayList<User>
-    private var turno = 0
-    private var validador : ValidadorDeJuego = ChessFactory().createClasssicValidators()
+class Mychess: GamesInterface {
+    override var tablero : Tablero = MyThings().tablero
+    override var jugadores : ArrayList<User> = MyThings().jugadores as ArrayList<User>
+    override var turno = 0
+    override var validador : ValidadorDeJuego = ChessFactory().createClasssicValidators()
 
 
     override fun applyMove(move: Move) : MoveResult {

@@ -11,14 +11,15 @@ import myCheckers.validadoresDeJuegos.ValidadorGanarDamas
 import common.validadoresDeJuego.ValidadorMoverTuPieza
 import myCheckers.validadoresDeJuegos.ValidadorMovimientoDama
 import common.validadoresDeJuego.ValidadorMovimientosEspeciales
+import edu.austral.dissis.common.GamesInterface
 import myCheckers.validadoresDeJuegos.ValidadorPuedeComer
 
-class MyCheckers : GameEngine {
+class MyCheckers :  GamesInterface {
     private val factory : CheckersFactory = CheckersFactory()
-    private var tablero: Tablero = Tablero(8, 8)
-    private var jugadores: MutableList<User> = ArrayList()
-    private var turno = 0
-    private val validador : ValidadorDeJuego = factory.classicCheckersValidator()
+    override var tablero: Tablero = Tablero(8, 8)
+    override var jugadores: ArrayList<User> = ArrayList()
+    override var turno = 0
+    override var validador : ValidadorDeJuego = factory.classicCheckersValidator()
 
 
     override fun applyMove(move: Move): MoveResult {
@@ -54,7 +55,7 @@ class MyCheckers : GameEngine {
 
     init {
         tablero = factory.createClassicalCheckers()
-        jugadores = factory.createPlayers().toList().toMutableList()
+        jugadores = factory.createPlayers().toList().toMutableList() as ArrayList<User>
     }
 
 

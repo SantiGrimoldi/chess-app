@@ -3,11 +3,12 @@
  */
 package edu.austral.dissis.common
 
-import edu.austral.dissis.checkers.MyCheckers
 import edu.austral.dissis.chess.Mychess
 import edu.austral.dissis.chess.gui.CachedImageResolver
 import edu.austral.dissis.chess.gui.DefaultImageResolver
 import edu.austral.dissis.chess.gui.GameView
+import edu.austral.dissis.connection.server.ServerHandler
+import edu.austral.ingsis.clientserver.netty.server.NettyServerBuilder
 import javafx.application.Application
 import javafx.application.Application.launch
 import javafx.scene.Scene
@@ -22,17 +23,22 @@ class ChessGameApplication : Application() {
 //    private val gameEngine = MyCheckers()
     private val gameEngine = Mychess()
     private val imageResolver = CachedImageResolver(DefaultImageResolver())
+    private val root = GameView(imageResolver)
+    private val server = NettyServerBuilder.createDefault()
+    private val serverHandler : ServerHandler = ServerHandler(gameEngine, root, server)
+
 
     companion object {
         const val GameTitle = "Chess"
     }
 
+
     override fun start(primaryStage: Stage) {
         primaryStage.title = GameTitle
-
-        val root = GameView(gameEngine, imageResolver)
         primaryStage.scene = Scene(root)
 
         primaryStage.show()
     }
+
+
 }
