@@ -7,7 +7,5 @@ class ServerGameListener (private var serverHandler : ServerHandler) : GameEvent
     override fun handleMove(move: Move) {
         serverHandler.handleMove(move)
     }
-    public fun setGame(serverHandler: ServerHandler){
-        this.serverHandler = serverHandler
-    }
+
 }

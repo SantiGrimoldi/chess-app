@@ -3,6 +3,7 @@
  */
 package edu.austral.dissis.common
 
+import edu.austral.dissis.checkers.MyCheckers
 import edu.austral.dissis.chess.Mychess
 import edu.austral.dissis.chess.gui.CachedImageResolver
 import edu.austral.dissis.chess.gui.DefaultImageResolver
@@ -20,8 +21,8 @@ fun main() {
 }
 
 class ChessGameApplication : Application() {
-//    private val gameEngine = MyCheckers()
-    private val gameEngine = Mychess()
+    private val gameEngine = MyCheckers()
+//    private val gameEngine = Mychess()
     private val imageResolver = CachedImageResolver(DefaultImageResolver())
     private val root = GameView(imageResolver)
     private val server = NettyServerBuilder.createDefault()
