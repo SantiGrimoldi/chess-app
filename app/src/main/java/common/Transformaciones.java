@@ -39,8 +39,7 @@ public class Transformaciones implements MovimientoEspecial {
     }
 
     private boolean isPiezaIntercambiable(Pieza pieza) {
-        return pieza.getMovimientosEspeciales().contains(MovimientosEspeciales.PRIMERO) &&
-                piezaActual.equals(pieza);
+        return piezaActual.equals(pieza);
 
     }
 }

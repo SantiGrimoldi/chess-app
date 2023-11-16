@@ -19,13 +19,31 @@ import java.util.stream.IntStream
 class ChessFactory {
 
     fun createClasssicValidators() : ValidadorDeJuego{
+        val movEsp = validadorMovsEsp()
         var myValidator  = ValidadorAnd(listOf(ValidadorMoverTuPieza(),
             ValidadorCasilleroFinalAjedrez()
         ))
         val movimientos = ValidadorOr(listOf(ValidadorMovimientosNormales(), ValidadorMovimientosEspeciales(listOf(Enroque(), PrimeroPeon()))))
-        myValidator = myValidator.addValidador(movimientos)
         myValidator = myValidator.addValidador(Jaque())
+        myValidator = myValidator.addValidador(movimientos)
+        myValidator = myValidator.addValidador(movEsp)
         return myValidator.addValidador(JaqueMate())
+    }
+
+    private fun validadorMovsEsp() : ValidadorMovimientosEspeciales {
+        val player1 = User("jugador", PlayerColor.WHITE)
+        val player2 = User("jugador2", PlayerColor.BLACK)
+        val blancaActual = Pieza(NombrePieza.PEON, listOf(Peon()), player1, "b1")
+        val negraActual = Pieza(NombrePieza.PEON, listOf(Peon(-1)), player2, "b2")
+        val reyBlanca = Pieza(NombrePieza.REINA, listOf(Vertical(false), Horizontal(false), Diagonal(false)), player1, "r1")
+        val reyNegra = Pieza(NombrePieza.REINA, listOf(Vertical(false), Horizontal(false), Diagonal(false)), player2, "r2")
+        val movEsp = ValidadorMovimientosEspeciales(
+            listOf(
+                Transformaciones(blancaActual,reyBlanca,7),
+                Transformaciones(negraActual,reyNegra,0)
+            )
+        )
+        return movEsp
     }
 
     fun addPieces(player1: User, player2: User) : Tablero {
@@ -192,6 +210,80 @@ class ChessFactory {
             )
         }
         return board
+    }
+
+    fun simplifiedChess(player1: User, player2: User) : Tablero {
+        var tablero = Tablero(8, 8)
+        tablero = tablero.agregarPieza(
+            Pieza(
+                NombrePieza.REY,
+                listOf(UnCuadrado()),
+                player1,
+                true,
+                listOf(MovimientosEspeciales.ENROQUE),
+                "k1"
+            ), Posicion(0, 3)
+        )
+        tablero = tablero.agregarPieza(
+            Pieza(
+                NombrePieza.REY,
+                listOf(UnCuadrado()),
+                player2,
+                true,
+                listOf(MovimientosEspeciales.ENROQUE),
+                "k2"
+            ), Posicion(7, 3)
+        )
+
+        tablero = tablero.agregarPieza(
+            Pieza(
+                NombrePieza.ESPECIAL,
+                listOf(
+                    Vertical(true,3),
+                    Horizontal(true,3),
+                    Diagonal(false,3)
+                ),
+                player1,
+                "q1"
+            ),
+            Posicion(0, 4)
+            )
+        tablero = tablero.agregarPieza(
+            Pieza(
+                NombrePieza.ESPECIAL,
+                listOf(
+                    Vertical(true,3),
+                    Horizontal(true,3),
+                    Diagonal(false,3)
+                ),
+                player2,
+                "q2"
+            ),
+            Posicion(7, 4)
+        )
+
+        for (i in IntStream.range(0, 8)) {
+            tablero = tablero.agregarPieza(
+                Pieza(
+                    NombrePieza.PEON,
+                    listOf(Peon()),
+                    player1,
+                    listOf(MovimientosEspeciales.PRIMERO),
+                    "pb" + i
+                ), Posicion(1, i)
+            )
+            tablero = tablero.agregarPieza(
+                Pieza(
+                    NombrePieza.PEON,
+                    listOf(Peon(-1)),
+                    player2,
+                    listOf(MovimientosEspeciales.PRIMERO),
+                    "pn" + i
+                ), Posicion(6, i)
+            )
+        }
+
+        return tablero
     }
 
     fun createPlayers(): Pair<User, User> {

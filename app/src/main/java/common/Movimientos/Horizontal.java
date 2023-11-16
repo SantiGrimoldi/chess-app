@@ -36,7 +36,7 @@ public class Horizontal implements Movimiento {
         int x1 = posicionFinal.getX();
         int y0 = posicionInicial.getY();
         int y1 = posicionFinal.getY();
-        return x0 == x1 && y0 != y1;
+        return x0 == x1 && y0 != y1 && distancia >= Math.abs(y0 - y1);
     }
 
     public boolean caminoLibre(Posicion posicionInicial, Posicion posicionFinal, Tablero tablero)  {

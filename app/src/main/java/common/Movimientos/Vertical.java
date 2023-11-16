@@ -35,7 +35,7 @@ public class Vertical implements Movimiento {
         int x1 = post.getX();
         int y0 = inicial.getY();
         int y1 = post.getY();
-        return x0 != x1 && y0 == y1;
+        return x0 != x1 && y0 == y1 && distancia >= Math.abs(x0 - x1);
     }
 
     public boolean caminoLibre(Posicion posicionInicial, Posicion posicionFinal, Tablero tablero) {

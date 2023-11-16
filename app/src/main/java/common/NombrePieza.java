@@ -6,5 +6,6 @@ public enum NombrePieza {
     CABALLO,
     ALFIL,
     REINA,
-    REY
+    REY,
+    ESPECIAL
 }

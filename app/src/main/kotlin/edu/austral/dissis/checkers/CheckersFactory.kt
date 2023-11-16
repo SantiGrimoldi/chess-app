@@ -4,6 +4,7 @@ import common.*
 import common.Movimientos.MovimientosEspeciales
 import common.validadoresDeJuego.ValidadorAnd
 import common.validadoresDeJuego.ValidadorDeJuego
+import myCheckers.validadoresDeJuegos.CheckMoveIfValid
 import common.validadoresDeJuego.ValidadorMoverTuPieza
 import common.validadoresDeJuego.ValidadorMovimientosEspeciales
 import edu.austral.dissis.chess.gui.PlayerColor
@@ -21,7 +22,7 @@ class CheckersFactory {
         return myV
     }
 
-    private fun validadorMovsEsp() : ValidadorMovimientosEspeciales {
+    private fun validadorMovsEsp() : ValidadorDeJuego {
         val player1 = User("jugador", PlayerColor.WHITE)
         val player2 = User("jugador2", PlayerColor.BLACK)
         val blancaActual = Pieza(NombrePieza.REINA, listOf(Dama()), player1, "b1")
@@ -32,9 +33,10 @@ class CheckersFactory {
             listOf(
                 Transformaciones(blancaActual,reyBlanca,7),
                 Transformaciones(negraActual,reyNegra,0)
-            )
-        )
-        return movEsp
+            ))
+        val condition = CheckMoveIfValid(movEsp)
+
+        return condition
     }
 
     fun createClassicalCheckers() : Tablero {

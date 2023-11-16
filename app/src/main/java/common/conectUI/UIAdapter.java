@@ -43,6 +43,7 @@ public class UIAdapter {
             case ALFIL -> "bishop";
             case REINA -> "queen";
             case REY -> "king";
+            case ESPECIAL -> "chancellor";
             default -> "empty";
         };
     }
