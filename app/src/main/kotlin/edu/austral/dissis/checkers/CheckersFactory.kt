@@ -77,6 +77,31 @@ class CheckersFactory {
         return tablero
     }
 
+    fun createWinCheckers(): Tablero {
+        var tablero = Tablero(8, 8)
+        val (player1, player2) = createPlayers()
+        val movBlanco = Dama()
+        val movNegro = Dama(-1)
+        tablero = tablero.agregarPieza(
+            Pieza(
+                NombrePieza.REINA,
+                listOf(movBlanco),
+                player1,
+                listOf(MovimientosEspeciales.PRIMERO),
+                "D1"
+            ), Posicion(3, 3)
+        )
+        tablero = tablero.agregarPieza(
+            Pieza(
+                NombrePieza.REINA,
+                listOf(movNegro),
+                player2,
+                listOf(MovimientosEspeciales.PRIMERO),
+                "D2"
+            ), Posicion(4, 4)
+        )
+        return tablero
+    }
     fun createPlayers(): Pair<User, User> {
         val player1 = User("Player 1", PlayerColor.WHITE)
         val player2 = User("Player 2", PlayerColor.BLACK)

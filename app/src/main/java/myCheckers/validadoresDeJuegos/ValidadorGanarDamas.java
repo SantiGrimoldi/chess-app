@@ -15,12 +15,21 @@ public class ValidadorGanarDamas implements ValidadorDeJuego {
     public ResultSet validarJuego(Posicion posicionInicial, Posicion posicionFinal, Tablero tablero, PlayerColor color) {
         Map<Posicion, Pieza> piezas = tablero.getTodasLasPiezas();
         piezas = piezas.entrySet().stream().filter((entry) -> entry.getValue().getColor() == color).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        PlayerColor otherColor = color == PlayerColor.WHITE ? PlayerColor.BLACK : PlayerColor.WHITE;
+        if (checkOtherEmpty(tablero, otherColor)) return new ResultSet(true, tablero, "Ganaste");
         if (puedeMover(piezas, tablero)) {
             return new ResultSet(tablero, "Movimiento valido", false, false);
         }
         else {
             return new ResultSet(true, tablero, "Ganaste");
         }
+    }
+
+    private boolean checkOtherEmpty(Tablero tablero, PlayerColor color){
+        Map<Posicion, Pieza> piezas = tablero.getTodasLasPiezas();
+        piezas = piezas.entrySet().stream().filter((entry) -> entry.getValue().getColor() == color).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        if (piezas.isEmpty()) return true;
+        else return false;
     }
 
     private boolean puedeMover(Map<Posicion, Pieza> piezas, Tablero tablero) {

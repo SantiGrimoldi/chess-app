@@ -55,6 +55,7 @@ class MyCheckers :  GamesInterface {
 
     init {
         tablero = factory.createClassicalCheckers()
+//        tablero = factory.createWinCheckers()
         jugadores = factory.createPlayers().toList().toMutableList() as ArrayList<User>
     }
 
