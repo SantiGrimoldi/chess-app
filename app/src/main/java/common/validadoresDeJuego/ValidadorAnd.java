@@ -1,31 +1,31 @@
 package common.validadoresDeJuego;
 
-import common.Posicion;
-import common.Tablero;
+import common.Position;
+import common.Board;
 import edu.austral.dissis.chess.gui.PlayerColor;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ValidadorAnd implements ValidadorDeJuego{
+public class ValidadorAnd implements gameValidator {
     private Boolean keepTurn = false;
-    List<ValidadorDeJuego> validadores;
+    List<gameValidator> validators;
 
 
-    public ValidadorAnd(List<ValidadorDeJuego> validadores) {
-        this.validadores = validadores;
+    public ValidadorAnd(List<gameValidator> validators) {
+        this.validators = validators;
     }
 
 
     @Override
-    public ResultSet validarJuego(Posicion posicionInicial, Posicion posicionFinal, Tablero tablero, PlayerColor color) {
-        for (ValidadorDeJuego validador : validadores) {
-            ResultSet resultSet = validador.validarJuego(posicionInicial, posicionFinal, tablero, color);
+    public ResultSet validateGame(Position initialPosition, Position finalPosition, Board board, PlayerColor color) {
+        for (gameValidator validador : validators) {
+            ResultSet resultSet = validador.validateGame(initialPosition, finalPosition, board, color);
             if (resultSet.getInvalid() || resultSet.getWin()) {
                 return resultSet;
             }
             else {
-                tablero = resultSet.getTablero();
+                board = resultSet.getBoard();
                 if (resultSet.keepTurn()) {
                     keepTurn = true;
                 }
@@ -34,14 +34,14 @@ public class ValidadorAnd implements ValidadorDeJuego{
         }
         if (keepTurn){
             keepTurn = false;
-            return new ResultSet(tablero, "Movimiento valido", true, false, true);
+            return new ResultSet(board, "Movimiento valido", true, false, true);
         }
-        return new ResultSet(tablero, "Movimiento valido", true, false);
+        return new ResultSet(board, "Movimiento valido", true, false);
 
     }
 
-    public ValidadorAnd addValidador(ValidadorDeJuego validador) {
-        List<ValidadorDeJuego> validadores = new ArrayList<>(this.validadores);
+    public ValidadorAnd addValidador(gameValidator validador) {
+        List<gameValidator> validadores = new ArrayList<>(this.validators);
         validadores.add(validador);
         return new ValidadorAnd(validadores);
     }

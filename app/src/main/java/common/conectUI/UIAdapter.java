@@ -1,40 +1,39 @@
 package common.conectUI;
 
-import common.NombrePieza;
-import common.Pieza;
-import common.Posicion;
-import common.Tablero;
+import common.PieceNames;
+import common.Piece;
+import common.Position;
+import common.Board;
 import edu.austral.dissis.chess.gui.*;
-import edu.austral.dissis.chess.gui.Position;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class UIAdapter {
-    public static BoardSize adaptBoard(Tablero board){
-        return new BoardSize(board.getFilas(), board.getColumnas());
+    public static BoardSize adaptBoard(Board board){
+        return new BoardSize(board.rowsSize(), board.columnsSize());
     }
-    public static Position adaptPosition(Posicion position){
-        return new Position(position.getX() +1 , position.getY() +1 );
+    public static edu.austral.dissis.chess.gui.Position adaptPosition(Position position){
+        return new edu.austral.dissis.chess.gui.Position(position.getX() +1 , position.getY() +1 );
     }
 
-    public static List<ChessPiece> adaptPieces(Tablero board){
+    public static List<ChessPiece> adaptPieces(Board board){
 
-        List<ChessPiece> piezasNuevas = new ArrayList<>();
-        Map<Posicion, Pieza> piezasViejas = board.getTodasLasPiezas();
-        piezasViejas.forEach((posicion, pieza) -> {
-            piezasNuevas.add(
+        List<ChessPiece> newPieces = new ArrayList<>();
+        Map<Position, Piece> oldPieces = board.getAllPieces();
+        oldPieces.forEach((posicion, pieza) -> {
+            newPieces.add(
                     new ChessPiece(
                             pieza.getId(),
                             pieza.getColor(),
                             adaptPosition(posicion),
-                            adaptName(pieza.getNombre())));
+                            adaptName(pieza.getName())));
         });
 
-        return piezasNuevas;
+        return newPieces;
     }
-    private static String adaptName(NombrePieza name){
+    private static String adaptName(PieceNames name){
 
         return switch (name) {
             case PEON -> "pawn";

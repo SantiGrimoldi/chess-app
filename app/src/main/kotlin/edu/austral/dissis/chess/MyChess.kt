@@ -4,15 +4,16 @@ import common.*
 
 class MyThings()  {
     private var factory = ChessFactory()
-    var tablero: Tablero = Tablero(8, 8)
-    val jugadores: MutableList<User> = ArrayList()
+    var board: Board = Board(8, 8)
+    val players: MutableList<User> = ArrayList()
 
     init {
         val (player1, player2) = factory.createPlayers()
-        jugadores.add(player1)
-        jugadores.add(player2)
+        players.add(player1)
+        players.add(player2)
 //        tablero = factory.simplifiedChess(player1, player2)
-        tablero = factory.addPieces(player1, player2)
+        board = factory.addPieces(player1, player2)
+//        tablero = factory.winChess(player1,player2)
     }
 
 }

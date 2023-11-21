@@ -1,21 +1,20 @@
 package myChess.game.validadoresDeJuego;
 
 import common.validadoresDeJuego.ResultSet;
-import common.validadoresDeJuego.ValidadorDeJuego;
+import common.validadoresDeJuego.gameValidator;
 import edu.austral.dissis.chess.gui.PlayerColor;
-import common.Pieza;
-import common.Posicion;
-import common.Tablero;
-import common.User;
+import common.Piece;
+import common.Position;
+import common.Board;
 
 import java.util.List;
 
-public class Jaque implements ValidadorDeJuego {
-    public static Boolean jaque (Posicion posPieza, Posicion posRey, Tablero tablero) {
+public class Jaque implements gameValidator {
+    public static Boolean jaque (Position posPieza, Position posRey, Board board) {
         try{
-            if (!tablero.tienePieza(posPieza)) return false;
-            Pieza pieza = tablero.obtenerPieza(posPieza);
-            if (pieza.movimientoValido(posPieza, posRey, tablero)) {
+            if (!board.hasPiece(posPieza)) return false;
+            Piece piece = board.getPiece(posPieza);
+            if (piece.isValidMovement(posPieza, posRey, board)) {
                 return true;
             }
             return false;
@@ -25,13 +24,13 @@ public class Jaque implements ValidadorDeJuego {
         }
     }
 
-    public boolean estoyEnJaque (Posicion rey, Tablero tablero, PlayerColor jugador) {
+    public boolean estoyEnJaque (Position rey, Board board, PlayerColor jugador) {
 
-        for (int i = 0; i< tablero.getFilas(); i++){
-            for (int j = 0; j< tablero.getColumnas(); j++){
-                Posicion posicion = new Posicion(i,j);
-                if (tablero.tienePieza(posicion) && tablero.obtenerPieza(posicion).getColor() != jugador) {
-                    if (Jaque.jaque(posicion, rey, tablero)) {
+        for (int i = 0; i< board.rowsSize(); i++){
+            for (int j = 0; j< board.columnsSize(); j++){
+                Position position = new Position(i,j);
+                if (board.hasPiece(position) && board.getPiece(position).getColor() != jugador) {
+                    if (Jaque.jaque(position, rey, board)) {
                         return true;
                     }
                 }
@@ -40,13 +39,13 @@ public class Jaque implements ValidadorDeJuego {
         return false;
     }
 
-    public boolean salgoDeJaque (Posicion posicionInicial, Posicion posicionFinal, Tablero tablero, PlayerColor jugador) {
-        Tablero tableroAux = tablero.moverPieza(posicionInicial, posicionFinal, tablero.obtenerPieza(posicionInicial));
-        List<Posicion> reyes = tableroAux.reyes();
+    public boolean salgoDeJaque (Position positionInicial, Position positionFinal, Board board, PlayerColor jugador) {
+        Board boardAux = board.moovePiece(positionInicial, positionFinal, board.getPiece(positionInicial));
+        List<Position> reyes = boardAux.kings();
         if (reyes.isEmpty())  return true;
-        for (Posicion rey : reyes) {
-            if (tableroAux.obtenerPieza(rey).getColor() == jugador) {
-                return !estoyEnJaque(rey, tableroAux, jugador);
+        for (Position rey : reyes) {
+            if (boardAux.getPiece(rey).getColor() == jugador) {
+                return !estoyEnJaque(rey, boardAux, jugador);
             }
         }
         return false;
@@ -54,15 +53,15 @@ public class Jaque implements ValidadorDeJuego {
 
 
 
-    public boolean movValidoJuego(Posicion inicial, Posicion post, Tablero tablero, PlayerColor color) {
-        return salgoDeJaque(inicial, post, tablero, color);
+    public boolean movValidoJuego(Position inicial, Position post, Board board, PlayerColor color) {
+        return salgoDeJaque(inicial, post, board, color);
     }
 
     @Override
-    public ResultSet validarJuego(Posicion posicionInicial, Posicion posicionFinal, Tablero tablero, PlayerColor color) {
-        if (movValidoJuego(posicionInicial, posicionFinal, tablero, color)) {
-            return new ResultSet(tablero, "Movimiento valido", false, false);
+    public ResultSet validateGame(Position initialPosition, Position finalPosition, Board board, PlayerColor color) {
+        if (movValidoJuego(initialPosition, finalPosition, board, color)) {
+            return new ResultSet(board, "Movimiento valido", false, false);
         }
-        return new ResultSet(tablero, "Estas en jaque o pieza pineada", false, true);
+        return new ResultSet(board, "Estas en jaque o pieza pineada", false, true);
     }
 }

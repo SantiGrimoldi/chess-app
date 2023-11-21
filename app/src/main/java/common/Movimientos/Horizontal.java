@@ -1,29 +1,29 @@
 package common.Movimientos;
 
-import common.interfaces.Movimiento;
-import common.Posicion;
-import common.Tablero;
+import common.interfaces.Movement;
+import common.Position;
+import common.Board;
 
-public class Horizontal implements Movimiento {
+public class Horizontal implements Movement {
 
-    private final boolean salto;
-    private final int distancia;
+    private final boolean canJump;
+    private final int distance;
 
-    public Horizontal(boolean salto, int distancia) {
-        this.salto = salto;
-        this.distancia = distancia;
+    public Horizontal(boolean canJump, int distance) {
+        this.canJump = canJump;
+        this.distance = distance;
     }
 
-    public Horizontal (boolean salto) {
-        this.salto = salto;
-        this.distancia = Integer.MAX_VALUE;
+    public Horizontal (boolean canJump) {
+        this.canJump = canJump;
+        this.distance = Integer.MAX_VALUE;
     }
 
     @Override
-    public Boolean movimientoValido(Posicion posicionInicial, Posicion posicionFinal, Tablero tablero) {
-        if (inicialFinalValido(posicionInicial, posicionFinal)) {
-            if (!salto) {
-                return caminoLibre(posicionInicial, posicionFinal, tablero);
+    public Boolean isMovementValid(Position initialPosition, Position finalPosition, Board board) {
+        if (isHorizontal(initialPosition, finalPosition)) {
+            if (!canJump) {
+                return hasFreePath(initialPosition, finalPosition, board);
             } else {
                 return true;
             }
@@ -31,22 +31,22 @@ public class Horizontal implements Movimiento {
         return false;
     }
 
-    private boolean inicialFinalValido(Posicion posicionInicial, Posicion posicionFinal){
-        int x0 = posicionInicial.getX();
-        int x1 = posicionFinal.getX();
-        int y0 = posicionInicial.getY();
-        int y1 = posicionFinal.getY();
-        return x0 == x1 && y0 != y1 && distancia >= Math.abs(y0 - y1);
+    private boolean isHorizontal(Position initialPosition, Position finalPosition){
+        int x0 = initialPosition.getX();
+        int x1 = finalPosition.getX();
+        int y0 = initialPosition.getY();
+        int y1 = finalPosition.getY();
+        return x0 == x1 && y0 != y1 && distance >= Math.abs(y0 - y1);
     }
 
-    public boolean caminoLibre(Posicion posicionInicial, Posicion posicionFinal, Tablero tablero)  {
-        int y0 = posicionInicial.getY();
-        int y1 = posicionFinal.getY();
-        int x = posicionInicial.getX();
+    public boolean hasFreePath(Position initialPosition, Position finalPosition, Board board)  {
+        int y0 = initialPosition.getY();
+        int y1 = finalPosition.getY();
+        int x = initialPosition.getX();
         int diffY = y0 < y1 ? 1 : -1;
-        if (Math.abs(y0 - y1) > distancia) return false;
+        if (Math.abs(y0 - y1) > distance) return false;
         for (int i = y0 + diffY; i != y1; i += diffY) {
-            if (tablero.tienePieza(new Posicion(x, i))) return false;
+            if (board.hasPiece(new Position(x, i))) return false;
         }
         return true;
     }

@@ -1,6 +1,6 @@
 package common;
 
-public enum NombrePieza {
+public enum PieceNames {
     PEON,
     TORRE,
     CABALLO,

@@ -1,10 +1,10 @@
 package common;
 
-public class Posicion {
+public class Position {
     private int x;
     private int y;
 
-    public Posicion (int x, int y) {
+    public Position(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -17,7 +17,7 @@ public class Posicion {
         return y;
     }
 
-    public boolean equals(Posicion posicion) {
-        return this.x == posicion.getX() && this.y == posicion.getY();
+    public boolean equals(Position position) {
+        return this.x == position.getX() && this.y == position.getY();
     }
 }

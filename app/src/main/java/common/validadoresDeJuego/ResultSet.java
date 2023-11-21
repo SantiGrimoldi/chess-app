@@ -1,17 +1,17 @@
 package common.validadoresDeJuego;
 
-import common.Tablero;
+import common.Board;
 
 public class ResultSet {
-    private Tablero tablero;
+    private Board board;
     private final String Explanation;
     private final Boolean returnable;
     private final Boolean invalid;
     private final Boolean win;
     private final Boolean keepTurn;
 
-    public ResultSet(Tablero tablero, String Explanation, Boolean returnable, Boolean invalid) {
-        this.tablero = tablero;
+    public ResultSet(Board board, String Explanation, Boolean returnable, Boolean invalid) {
+        this.board = board;
         this.Explanation = Explanation;
         this.returnable = returnable;
         this.invalid = invalid;
@@ -19,8 +19,8 @@ public class ResultSet {
         this.keepTurn = false;
     }
 
-    public ResultSet(Tablero tablero, String Explanation, Boolean returnable, Boolean invalid, Boolean keepTurn) {
-        this.tablero = tablero;
+    public ResultSet(Board board, String Explanation, Boolean returnable, Boolean invalid, Boolean keepTurn) {
+        this.board = board;
         this.Explanation = Explanation;
         this.returnable = returnable;
         this.invalid = invalid;
@@ -28,8 +28,8 @@ public class ResultSet {
         this.keepTurn = keepTurn;
     }
 
-    public ResultSet(Boolean win, Tablero tablero, String Explanation) {
-        this.tablero = tablero;
+    public ResultSet(Boolean win, Board board, String Explanation) {
+        this.board = board;
         this.Explanation = Explanation;
         this.returnable = true;
         this.invalid = false;
@@ -37,8 +37,8 @@ public class ResultSet {
         this.keepTurn = false;
     }
 
-    public Tablero getTablero() {
-        return tablero;
+    public Board getBoard() {
+        return board;
     }
     public String getExplanation() {
         return Explanation;
@@ -56,8 +56,8 @@ public class ResultSet {
         return win;
     }
 
-    public void setTablero(Tablero tablero) {
-        this.tablero = tablero;
+    public void setBoard(Board board) {
+        this.board = board;
     }
 
     public Boolean keepTurn() {
