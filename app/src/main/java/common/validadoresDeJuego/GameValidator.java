@@ -4,7 +4,7 @@ import common.Position;
 import common.Board;
 import edu.austral.dissis.chess.gui.PlayerColor;
 
-public interface gameValidator {
+public interface GameValidator {
     public ResultSet validateGame(
             Position initialPosition,
             Position finalPosition,

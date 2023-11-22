@@ -3,7 +3,7 @@ package edu.austral.dissis.checkers
 import common.*
 import common.Movimientos.MovimientosEspeciales
 import common.validadoresDeJuego.ValidadorAnd
-import common.validadoresDeJuego.gameValidator
+import common.validadoresDeJuego.GameValidator
 import myCheckers.gameValidators.CheckMoveIfValid
 import common.validadoresDeJuego.MoveYourPieceValidator
 import common.validadoresDeJuego.SpecialMoveValidator
@@ -15,7 +15,7 @@ import myCheckers.gameValidators.ValidateFinalPosition
 import myCheckers.gameValidators.IsAbleToEatValidator
 
 class CheckersFactory {
-    fun classicCheckersValidator () : gameValidator {
+    fun classicCheckersValidator () : GameValidator {
         val movEsp = specialMovementValidator()
         val myV = ValidadorAnd(listOf(
             MoveYourPieceValidator(),
@@ -26,7 +26,7 @@ class CheckersFactory {
         return myV
     }
 
-    private fun specialMovementValidator() : gameValidator {
+    private fun specialMovementValidator() : GameValidator {
         val player1 = User("jugador", PlayerColor.WHITE)
         val player2 = User("jugador2", PlayerColor.BLACK)
         val blancaActual = Piece(PieceNames.REINA, listOf(Dama()), player1, "b1")

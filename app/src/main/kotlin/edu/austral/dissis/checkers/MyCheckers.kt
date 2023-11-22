@@ -5,7 +5,7 @@ import common.Position
 import edu.austral.dissis.chess.gui.*
 import common.conectUI.UIAdapter
 import common.validadoresDeJuego.ResultSet
-import common.validadoresDeJuego.gameValidator
+import common.validadoresDeJuego.GameValidator
 import edu.austral.dissis.common.GamesInterface
 
 class MyCheckers :  GamesInterface {
@@ -13,7 +13,7 @@ class MyCheckers :  GamesInterface {
     override var board: Board = Board(8, 8)
     override var players: ArrayList<User> = ArrayList()
     override var turn = 0
-    override var validator : gameValidator = factory.classicCheckersValidator()
+    override var validator : GameValidator = factory.classicCheckersValidator()
 
 
     override fun applyMove(move: Move): MoveResult {

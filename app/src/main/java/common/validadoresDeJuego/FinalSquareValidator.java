@@ -4,7 +4,7 @@ import common.Position;
 import common.Board;
 import edu.austral.dissis.chess.gui.PlayerColor;
 
-public class FinalSquareValidator implements gameValidator {
+public class FinalSquareValidator implements GameValidator {
     @Override
     public ResultSet validateGame(Position initialPosition, Position finalPosition, Board board, PlayerColor color) {
         if (board.hasPiece(finalPosition) && board.getPiece(finalPosition).getColor() == color) {

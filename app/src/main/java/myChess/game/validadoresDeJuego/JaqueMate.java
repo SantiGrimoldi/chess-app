@@ -1,7 +1,7 @@
 package myChess.game.validadoresDeJuego;
 
 import common.validadoresDeJuego.ResultSet;
-import common.validadoresDeJuego.gameValidator;
+import common.validadoresDeJuego.GameValidator;
 import edu.austral.dissis.chess.gui.PlayerColor;
 import common.Piece;
 import common.Position;
@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
-public class JaqueMate implements gameValidator {
+public class JaqueMate implements GameValidator {
     Jaque jaque = new Jaque();
 
     @Override

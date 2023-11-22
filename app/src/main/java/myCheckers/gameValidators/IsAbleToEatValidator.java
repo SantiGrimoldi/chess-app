@@ -1,13 +1,13 @@
 package myCheckers.gameValidators;
 
 import common.validadoresDeJuego.ResultSet;
-import common.validadoresDeJuego.gameValidator;
+import common.validadoresDeJuego.GameValidator;
 import edu.austral.dissis.chess.gui.PlayerColor;
 import common.Piece;
 import common.Position;
 import common.Board;
 
-public class IsAbleToEatValidator implements gameValidator {
+public class IsAbleToEatValidator implements GameValidator {
     @Override
     public ResultSet validateGame(Position initialPosition, Position finalPosition, Board board, PlayerColor color) {
         int diffX = Math.abs(finalPosition.getX() - initialPosition.getX());

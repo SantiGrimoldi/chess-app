@@ -7,7 +7,7 @@ import edu.austral.dissis.chess.gui.PlayerColor;
 
 import java.util.List;
 
-public class SpecialMoveValidator implements gameValidator {
+public class SpecialMoveValidator implements GameValidator {
     private final List<SpecialMovement> specialMovements;
 
     public SpecialMoveValidator(List<SpecialMovement> specialMovements) {

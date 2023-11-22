@@ -3,8 +3,7 @@ package edu.austral.dissis.chess
 import common.*
 import common.Movimientos.*
 import common.validadoresDeJuego.ValidadorAnd
-import common.validadoresDeJuego.FinalSquareValidator
-import common.validadoresDeJuego.gameValidator
+import common.validadoresDeJuego.GameValidator
 import common.validadoresDeJuego.MoveYourPieceValidator
 import common.validadoresDeJuego.SpecialMoveValidator
 import common.validadoresDeJuego.NormalMoveValidator
@@ -18,11 +17,11 @@ import java.util.stream.IntStream
 
 class ChessFactory {
 
-    fun createClasssicValidators() : gameValidator {
+    fun createClasssicValidators() : GameValidator {
         val movEsp = specialMoveValidator()
         var myValidator  = ValidadorAnd(listOf(
-            MoveYourPieceValidator(),
-            FinalSquareValidator()
+            MoveYourPieceValidator()
+//            ,FinalSquareValidator()
         ))
         val movimientos = ValidadorOr(listOf(
             NormalMoveValidator(),

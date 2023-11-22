@@ -1,7 +1,7 @@
 package myChess.game.validadoresDeJuego;
 
 import common.validadoresDeJuego.ResultSet;
-import common.validadoresDeJuego.gameValidator;
+import common.validadoresDeJuego.GameValidator;
 import edu.austral.dissis.chess.gui.PlayerColor;
 import common.Piece;
 import common.Position;
@@ -9,7 +9,7 @@ import common.Board;
 
 import java.util.List;
 
-public class Jaque implements gameValidator {
+public class Jaque implements GameValidator {
     public static Boolean jaque (Position posPieza, Position posRey, Board board) {
         try{
             if (!board.hasPiece(posPieza)) return false;

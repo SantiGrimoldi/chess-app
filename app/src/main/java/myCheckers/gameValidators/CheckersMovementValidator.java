@@ -1,13 +1,13 @@
 package myCheckers.gameValidators;
 
 import common.validadoresDeJuego.ResultSet;
-import common.validadoresDeJuego.gameValidator;
+import common.validadoresDeJuego.GameValidator;
 import common.Piece;
 import common.Position;
 import common.Board;
 import edu.austral.dissis.chess.gui.PlayerColor;
 
-public class CheckersMovementValidator implements gameValidator {
+public class CheckersMovementValidator implements GameValidator {
     @Override
     public ResultSet validateGame(Position initialPosition, Position finalPosition, Board board, PlayerColor color) {
         if (board.hasPiece(finalPosition)) return new ResultSet(board, "No podes mover ahi", false, false);

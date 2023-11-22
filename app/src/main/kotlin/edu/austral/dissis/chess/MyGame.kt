@@ -9,14 +9,14 @@ import common.Position
 import common.Board
 import common.User
 import common.validadoresDeJuego.ResultSet
-import common.validadoresDeJuego.gameValidator
+import common.validadoresDeJuego.GameValidator
 import edu.austral.dissis.common.GamesInterface
 
 class Mychess: GamesInterface {
     override var board : Board = MyThings().board
     override var players : ArrayList<User> = MyThings().players as ArrayList<User>
     override var turn = 0
-    override var validator : gameValidator = ChessFactory().createClasssicValidators()
+    override var validator : GameValidator = ChessFactory().createClasssicValidators()
 
 
     override fun applyMove(move: Move) : MoveResult {

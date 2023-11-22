@@ -3,13 +3,13 @@ package myCheckers.gameValidators;
 import common.Position;
 import common.Board;
 import common.validadoresDeJuego.ResultSet;
-import common.validadoresDeJuego.gameValidator;
+import common.validadoresDeJuego.GameValidator;
 import edu.austral.dissis.chess.gui.PlayerColor;
 
-public class CheckMoveIfValid implements gameValidator {
+public class CheckMoveIfValid implements GameValidator {
 
-    private gameValidator condition;
-    public CheckMoveIfValid(gameValidator condition) {
+    private GameValidator condition;
+    public CheckMoveIfValid(GameValidator condition) {
         this.condition = condition;
     }
 
