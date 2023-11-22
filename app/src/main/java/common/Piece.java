@@ -2,7 +2,7 @@ package common;
 
 import common.interfaces.Movement;
 import edu.austral.dissis.chess.gui.PlayerColor;
-import common.movements.MovimientosEspeciales;
+import common.movements.SpecialMovements;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +12,10 @@ public class Piece {
     private PieceNames name;
     private User owner;
     private List<Movement> movements;
-    List<MovimientosEspeciales> specialMovements;
+    List<SpecialMovements> specialMovements;
     private boolean isWiningPiece;
 
-    public Piece(PieceNames name, List<Movement> movs, User owner, List<MovimientosEspeciales> movsEspeciales, String id) {
+    public Piece(PieceNames name, List<Movement> movs, User owner, List<SpecialMovements> movsEspeciales, String id) {
         this.name = name;
         this.movements = movs;
         this.owner = owner;
@@ -34,7 +34,7 @@ public class Piece {
         this.id = id;
     }
 
-    public Piece(PieceNames name, List<Movement> movs, User owner, boolean isWiningPiece, List<MovimientosEspeciales> specialMovs, String id) {
+    public Piece(PieceNames name, List<Movement> movs, User owner, boolean isWiningPiece, List<SpecialMovements> specialMovs, String id) {
         this.name = name;
         this.movements = movs;
         this.owner = owner;
@@ -68,7 +68,7 @@ public class Piece {
         return isWiningPiece;
     }
 
-    public List<MovimientosEspeciales> getSpecialMovements() {
+    public List<SpecialMovements> getSpecialMovements() {
         return specialMovements;
     }
 
@@ -76,8 +76,8 @@ public class Piece {
         return id;
     }
 
-    public Piece takeSpecialMovements(List<MovimientosEspeciales> movsEspeciales) {
-        List<MovimientosEspeciales> nuevosMovsEspeciales = new ArrayList<>(this.specialMovements);
+    public Piece takeSpecialMovements(List<SpecialMovements> movsEspeciales) {
+        List<SpecialMovements> nuevosMovsEspeciales = new ArrayList<>(this.specialMovements);
         nuevosMovsEspeciales.removeAll(movsEspeciales);
         return new Piece(this.name, this.movements, this.owner, this.isWiningPiece, nuevosMovsEspeciales, this.id);
     }

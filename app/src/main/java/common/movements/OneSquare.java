@@ -7,6 +7,10 @@ import common.Board;
 public class OneSquare implements Movement {
     @Override
     public Boolean isMovementValid(Position initialPosition, Position finalPosition, Board board) {
+        return movesOneSquare(initialPosition, finalPosition);
+    }
+
+    private static boolean movesOneSquare(Position initialPosition, Position finalPosition) {
         int x0 = initialPosition.getX();
         int x1 = finalPosition.getX();
         int y0 = initialPosition.getY();

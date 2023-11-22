@@ -23,9 +23,9 @@ public class Board {
     }
 
     public Board addPiece(Piece piece, Position position) {
-        List<List<Piece>> tableroAux = clonate();
-        tableroAux.get(position.getX()).set(position.getY(), piece);
-        return new Board(tableroAux);
+        List<List<Piece>> auxBoard = clonate();
+        auxBoard.get(position.getX()).set(position.getY(), piece);
+        return new Board(auxBoard);
     }
 
     public Boolean hasPiece(Position position) {
@@ -34,9 +34,9 @@ public class Board {
     }
 
     public Board deletePiece(Position position) {
-        List<List<Piece>> tableroAux = clonate();
-        tableroAux.get(position.getX()).set(position.getY(), null);
-        return new Board(tableroAux);
+        List<List<Piece>> auxBoard = clonate();
+        auxBoard.get(position.getX()).set(position.getY(), null);
+        return new Board(auxBoard);
     }
 
     public Piece getPiece(Position position) {
@@ -44,11 +44,11 @@ public class Board {
     }
 
 
-    public Board moovePiece(Position positionInicial, Position positionFinal, Piece piece) {
-        List<List<Piece>> nuevaLista = clonate();
-        Board newBoard = new Board(nuevaLista);
-        newBoard = newBoard.deletePiece(positionInicial);
-        newBoard = newBoard.addPiece(piece, positionFinal);
+    public Board movePiece(Position initial, Position post, Piece piece) {
+        List<List<Piece>> newList = clonate();
+        Board newBoard = new Board(newList);
+        newBoard = newBoard.deletePiece(initial);
+        newBoard = newBoard.addPiece(piece, post);
         return newBoard;
     }
 
@@ -57,8 +57,8 @@ public class Board {
     }
 
     public Board forceMovements(Piece piece, Position positionFinal) {
-        List<List<Piece>> nuevaLista = clonate();
-        Board newBoard = new Board(nuevaLista);
+        List<List<Piece>> newList = clonate();
+        Board newBoard = new Board(newList);
         newBoard = newBoard.addPiece(piece, positionFinal);
         return newBoard;
     }
@@ -88,27 +88,27 @@ public class Board {
     }
 
     private List<List<Piece>> clonate() {
-        List<List<Piece>> nuevaLista = new ArrayList<>();
+        List<List<Piece>> newList = new ArrayList<>();
         for (int i = 0; i< pieceContainer.size(); i++){
-            List<Piece> columnas = new ArrayList<>();
-            nuevaLista.add(columnas);
+            List<Piece> columns = new ArrayList<>();
+            newList.add(columns);
             for (int j = 0; j< pieceContainer.get(i).size(); j++){
-                columnas.add(pieceContainer.get(i).get(j));
+                columns.add(pieceContainer.get(i).get(j));
             }
         }
-        return nuevaLista;
+        return newList;
     }
 
     public Map<Position, Piece> getAllPieces() {
-        Map<Position, Piece> piezas = new HashMap<>();
+        Map<Position, Piece> pieces = new HashMap<>();
         for (int i = 0; i< rowsSize(); i++){
             for (int j = 0; j< columnsSize(); j++){
                 if (pieceContainer.get(i).get(j) != null) {
-                    piezas.put(new Position(i,j), pieceContainer.get(i).get(j));
+                    pieces.put(new Position(i,j), pieceContainer.get(i).get(j));
                 }
             }
         }
-        return piezas;
+        return pieces;
     }
 
 //    public String imprimirTablero(){

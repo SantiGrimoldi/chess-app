@@ -20,7 +20,7 @@ public class CheckersMovementValidator implements GameValidator {
     private ResultSet validateMovement(Position positionInicial, Position positionFinal, Board board, PlayerColor color) {
         Piece piece = board.getPiece(positionInicial);
         if (piece.isValidMovement(positionInicial, positionFinal, board)){
-            board = board.moovePiece(positionInicial, positionFinal, piece);
+            board = board.movePiece(positionInicial, positionFinal, piece);
             board = cleanDiagonal(positionInicial, positionFinal, board);
             int diffX = Math.abs(positionFinal.getX() - positionInicial.getX());
             if (diffX == 2 && IsAbleToEatValidator.checkIfIsAbleToEat(board, color).getInvalid()) {

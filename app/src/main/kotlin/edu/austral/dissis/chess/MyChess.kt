@@ -11,9 +11,9 @@ class MyThings()  {
         val (player1, player2) = factory.createPlayers()
         players.add(player1)
         players.add(player2)
-//        tablero = factory.simplifiedChess(player1, player2)
+//        board = factory.simplifiedChess(player1, player2)
         board = factory.addPieces(player1, player2)
-//        tablero = factory.winChess(player1,player2)
+//        board = factory.winChess(player1,player2)
     }
 
 }

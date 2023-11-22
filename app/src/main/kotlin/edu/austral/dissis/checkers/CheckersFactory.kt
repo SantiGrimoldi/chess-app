@@ -1,7 +1,7 @@
 package edu.austral.dissis.checkers
 
 import common.*
-import common.movements.MovimientosEspeciales
+import common.movements.SpecialMovements
 import common.gameValidator.ValidadorAnd
 import common.gameValidator.GameValidator
 import myCheckers.gameValidators.CheckMoveIfValid
@@ -59,7 +59,7 @@ class CheckersFactory {
                             PieceNames.REINA,
                             listOf(movBlanco),
                             player1,
-                            listOf(MovimientosEspeciales.PRIMERO),
+                            listOf(SpecialMovements.FIRST),
                             "" + col + row
                         ), Position(row, col)
                     )
@@ -72,7 +72,7 @@ class CheckersFactory {
                             PieceNames.REINA,
                             listOf(movNegro),
                             player2,
-                            listOf(MovimientosEspeciales.PRIMERO),
+                            listOf(SpecialMovements.FIRST),
                             "" + col + row
                         ), Position(row, col)
                     )
@@ -92,7 +92,7 @@ class CheckersFactory {
                 PieceNames.REINA,
                 listOf(movBlanco),
                 player1,
-                listOf(MovimientosEspeciales.PRIMERO),
+                listOf(SpecialMovements.FIRST),
                 "D1"
             ), Position(3, 3)
         )
@@ -101,7 +101,7 @@ class CheckersFactory {
                 PieceNames.REINA,
                 listOf(movNegro),
                 player2,
-                listOf(MovimientosEspeciales.PRIMERO),
+                listOf(SpecialMovements.FIRST),
                 "D2"
             ), Position(4, 4)
         )

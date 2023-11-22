@@ -24,7 +24,7 @@ public class NormalMoveValidator implements GameValidator {
 
     private Board updateBoard(Position positionInicial, Position positionFinal, Board board, Piece piece) {
         piece = piece.cleanSpecialMovements();
-        Board boardNuevo = board.moovePiece(positionInicial, positionFinal, piece);
+        Board boardNuevo = board.movePiece(positionInicial, positionFinal, piece);
         return boardNuevo;
     }
 

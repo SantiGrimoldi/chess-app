@@ -10,9 +10,9 @@ import common.gameValidator.NormalMoveValidator
 import common.gameValidator.ValidadorOr
 import edu.austral.dissis.chess.gui.PlayerColor
 import myChess.game.specialMovements.Enroque
-import myChess.game.specialMovements.PrimeroPeon
-import myChess.game.gameValidators.Jaque
-import myChess.game.gameValidators.JaqueMate
+import myChess.game.specialMovements.FirstPawn
+import myChess.game.gameValidators.Check
+import myChess.game.gameValidators.CheckMate
 import java.util.stream.IntStream
 
 class ChessFactory {
@@ -25,12 +25,12 @@ class ChessFactory {
         ))
         val movimientos = ValidadorOr(listOf(
             NormalMoveValidator(),
-            SpecialMoveValidator(listOf(Enroque(), PrimeroPeon()))
+            SpecialMoveValidator(listOf(Enroque(), FirstPawn()))
         ))
-        myValidator = myValidator.addValidador(Jaque())
+        myValidator = myValidator.addValidador(Check())
         myValidator = myValidator.addValidador(movimientos)
         myValidator = myValidator.addValidador(movEsp)
-        return myValidator.addValidador(JaqueMate())
+        return myValidator.addValidador(CheckMate())
     }
 
     private fun specialMoveValidator() : SpecialMoveValidator {
@@ -67,7 +67,7 @@ class ChessFactory {
                 listOf(OneSquare()),
                 player1,
                 true,
-                listOf(MovimientosEspeciales.ENROQUE),
+                listOf(SpecialMovements.ENROQUE),
                 "k1"
             ), Position(0, 3)
         )
@@ -89,7 +89,7 @@ class ChessFactory {
                 listOf(OneSquare()),
                 player2,
                 true,
-                listOf(MovimientosEspeciales.ENROQUE),
+                listOf(SpecialMovements.ENROQUE),
                 "k2"
             ), Position(7, 3)
         )
@@ -161,7 +161,7 @@ class ChessFactory {
                     Horizontal(false)
                 ),
                 player1,
-                listOf(MovimientosEspeciales.ENROQUE),
+                listOf(SpecialMovements.ENROQUE),
                 "t1"
             ), Position(0, 0)
         )
@@ -173,7 +173,7 @@ class ChessFactory {
                     Horizontal(false)
                 ),
                 player1,
-                listOf(MovimientosEspeciales.ENROQUE),
+                listOf(SpecialMovements.ENROQUE),
                 "t2"
             ), Position(0, 7)
         )
@@ -185,7 +185,7 @@ class ChessFactory {
                     Horizontal(false)
                 ),
                 player2,
-                listOf(MovimientosEspeciales.ENROQUE),
+                listOf(SpecialMovements.ENROQUE),
                 "t3"
             ), Position(7, 0)
         )
@@ -197,7 +197,7 @@ class ChessFactory {
                     Horizontal(false)
                 ),
                 player2,
-                listOf(MovimientosEspeciales.ENROQUE),
+                listOf(SpecialMovements.ENROQUE),
                 "t4"
             ), Position(7, 7)
         )
@@ -208,7 +208,7 @@ class ChessFactory {
                     PieceNames.PEON,
                     listOf(Pawn()),
                     player1,
-                    listOf(MovimientosEspeciales.PRIMERO),
+                    listOf(SpecialMovements.FIRST),
                     "pb" + i
                 ), Position(1, i)
             )
@@ -217,7 +217,7 @@ class ChessFactory {
                     PieceNames.PEON,
                     listOf(Pawn(-1)),
                     player2,
-                    listOf(MovimientosEspeciales.PRIMERO),
+                    listOf(SpecialMovements.FIRST),
                     "pn" + i
                 ), Position(6, i)
             )
@@ -233,7 +233,7 @@ class ChessFactory {
                 listOf(OneSquare()),
                 player1,
                 true,
-                listOf(MovimientosEspeciales.ENROQUE),
+                listOf(SpecialMovements.ENROQUE),
                 "k1"
             ), Position(0, 3)
         )
@@ -243,7 +243,7 @@ class ChessFactory {
                 listOf(OneSquare()),
                 player2,
                 true,
-                listOf(MovimientosEspeciales.ENROQUE),
+                listOf(SpecialMovements.ENROQUE),
                 "k2"
             ), Position(7, 3)
         )
@@ -281,7 +281,7 @@ class ChessFactory {
                     PieceNames.PEON,
                     listOf(Pawn()),
                     player1,
-                    listOf(MovimientosEspeciales.PRIMERO),
+                    listOf(SpecialMovements.FIRST),
                     "pb" + i
                 ), Position(1, i)
             )
@@ -290,7 +290,7 @@ class ChessFactory {
                     PieceNames.PEON,
                     listOf(Pawn(-1)),
                     player2,
-                    listOf(MovimientosEspeciales.PRIMERO),
+                    listOf(SpecialMovements.FIRST),
                     "pn" + i
                 ), Position(6, i)
             )
@@ -307,7 +307,7 @@ class ChessFactory {
                 listOf(OneSquare()),
                 player2,
                 true,
-                listOf(MovimientosEspeciales.ENROQUE),
+                listOf(SpecialMovements.ENROQUE),
                 "k1"
             ), Position(0, 3)
         )
@@ -317,7 +317,7 @@ class ChessFactory {
                 listOf(OneSquare()),
                 player1,
                 true,
-                listOf(MovimientosEspeciales.ENROQUE),
+                listOf(SpecialMovements.ENROQUE),
                 "k3"
             ), Position(7, 3)
         )

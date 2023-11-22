@@ -49,7 +49,7 @@ class MyCheckers :  GamesInterface {
 
     init {
         board = factory.createClassicalCheckers()
-//        tablero = factory.createWinCheckers()
+//        board = factory.createWinCheckers()
         players = factory.createPlayers().toList().toMutableList() as ArrayList<User>
     }
 

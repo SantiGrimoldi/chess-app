@@ -20,7 +20,11 @@ public class Pawn implements Movement {
     public Boolean isMovementValid(Position initialPosition, Position finalPosition, Board board) {
         int diffX = getDiffX(initialPosition, finalPosition);
         int diffY = getDiffY(initialPosition, finalPosition);
-        return diffX * direction == 1 && diffY == 0 && !board.hasPiece(finalPosition)|| eatsInDiagonal(initialPosition, finalPosition, board);
+        return movesNormal(finalPosition, board, diffX, diffY) || eatsInDiagonal(initialPosition, finalPosition, board);
+    }
+
+    private boolean movesNormal(Position finalPosition, Board board, int diffX, int diffY) {
+        return diffX * direction == 1 && diffY == 0 && !board.hasPiece(finalPosition);
     }
 
     private static int getDiffY(Position initialPosition, Position finalPosition) {

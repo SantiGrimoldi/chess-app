@@ -1,6 +1,6 @@
 package myChess.game.specialMovements;
 
-import common.movements.MovimientosEspeciales;
+import common.movements.SpecialMovements;
 import common.interfaces.SpecialMovement;
 import common.PieceNames;
 import common.Piece;
@@ -41,7 +41,7 @@ public class Enroque implements SpecialMovement {
     }
 
     private static Piece cleanSpecialMovements(Piece piece) {
-        return piece.takeSpecialMovements(List.of(MovimientosEspeciales.ENROQUE));
+        return piece.takeSpecialMovements(List.of(SpecialMovements.ENROQUE));
     }
 
     @NotNull
@@ -54,7 +54,7 @@ public class Enroque implements SpecialMovement {
     }
 
     private static boolean esEnrocable(Piece piece) {
-        return piece.getSpecialMovements().contains(MovimientosEspeciales.ENROQUE);
+        return piece.getSpecialMovements().contains(SpecialMovements.ENROQUE);
     }
 
     private boolean notKing(Piece piece) {
