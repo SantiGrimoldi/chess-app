@@ -1,12 +1,12 @@
 package edu.austral.dissis.checkers
 
 import common.*
-import common.Movimientos.MovimientosEspeciales
-import common.validadoresDeJuego.ValidadorAnd
-import common.validadoresDeJuego.GameValidator
+import common.movements.MovimientosEspeciales
+import common.gameValidator.ValidadorAnd
+import common.gameValidator.GameValidator
 import myCheckers.gameValidators.CheckMoveIfValid
-import common.validadoresDeJuego.MoveYourPieceValidator
-import common.validadoresDeJuego.SpecialMoveValidator
+import common.gameValidator.MoveYourPieceValidator
+import common.gameValidator.SpecialMoveValidator
 import edu.austral.dissis.chess.gui.PlayerColor
 import myCheckers.Dama
 import myCheckers.gameValidators.WinCheckersValidator

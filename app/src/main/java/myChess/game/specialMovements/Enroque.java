@@ -1,6 +1,6 @@
 package myChess.game.specialMovements;
 
-import common.Movimientos.MovimientosEspeciales;
+import common.movements.MovimientosEspeciales;
 import common.interfaces.SpecialMovement;
 import common.PieceNames;
 import common.Piece;

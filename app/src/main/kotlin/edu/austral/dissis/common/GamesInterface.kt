@@ -2,7 +2,7 @@ package edu.austral.dissis.common
 
 import common.Board
 import common.User
-import common.validadoresDeJuego.GameValidator
+import common.gameValidator.GameValidator
 import edu.austral.dissis.chess.gui.GameEngine
 
 interface GamesInterface : GameEngine {

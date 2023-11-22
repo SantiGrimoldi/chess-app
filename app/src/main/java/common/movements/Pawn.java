@@ -1,4 +1,4 @@
-package common.Movimientos;
+package common.movements;
 
 import common.interfaces.Movement;
 import common.Position;

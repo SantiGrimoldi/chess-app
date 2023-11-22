@@ -1,12 +1,12 @@
 package myChess.game.specialMovements;
 
-import common.Movimientos.MovimientosEspeciales;
+import common.movements.MovimientosEspeciales;
 import common.PieceNames;
 import common.interfaces.SpecialMovement;
 import common.Piece;
 import common.Position;
 import common.Board;
-import common.Movimientos.Vertical;
+import common.movements.Vertical;
 
 import java.util.List;
 

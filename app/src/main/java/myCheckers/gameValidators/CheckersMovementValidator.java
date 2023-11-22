@@ -1,7 +1,7 @@
 package myCheckers.gameValidators;
 
-import common.validadoresDeJuego.ResultSet;
-import common.validadoresDeJuego.GameValidator;
+import common.gameValidator.ResultSet;
+import common.gameValidator.GameValidator;
 import common.Piece;
 import common.Position;
 import common.Board;

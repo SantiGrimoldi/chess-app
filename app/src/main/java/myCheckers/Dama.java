@@ -1,7 +1,7 @@
 package myCheckers;
 
 import common.interfaces.Movement;
-import common.Movimientos.Diagonal;
+import common.movements.Diagonal;
 import common.Piece;
 import common.Position;
 import common.Board;

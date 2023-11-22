@@ -1,11 +1,11 @@
 package edu.austral.dissis.chess
 
-import common.Movimientos.Diagonal
-import common.Movimientos.Horizontal
-import common.Movimientos.L
-import common.Movimientos.Pawn
-import common.Movimientos.OneSquare
-import common.Movimientos.Vertical
+import common.movements.Diagonal
+import common.movements.Horizontal
+import common.movements.L
+import common.movements.Pawn
+import common.movements.OneSquare
+import common.movements.Vertical
 import common.PieceNames
 import common.Piece
 import common.User

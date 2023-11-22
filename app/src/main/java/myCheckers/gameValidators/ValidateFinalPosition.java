@@ -2,8 +2,8 @@ package myCheckers.gameValidators;
 
 import common.Position;
 import common.Board;
-import common.validadoresDeJuego.ResultSet;
-import common.validadoresDeJuego.GameValidator;
+import common.gameValidator.ResultSet;
+import common.gameValidator.GameValidator;
 import edu.austral.dissis.chess.gui.PlayerColor;
 
 public class ValidateFinalPosition implements GameValidator {

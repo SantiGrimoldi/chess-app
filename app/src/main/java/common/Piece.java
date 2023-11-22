@@ -2,7 +2,7 @@ package common;
 
 import common.interfaces.Movement;
 import edu.austral.dissis.chess.gui.PlayerColor;
-import common.Movimientos.MovimientosEspeciales;
+import common.movements.MovimientosEspeciales;
 
 import java.util.ArrayList;
 import java.util.List;

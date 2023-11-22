@@ -4,8 +4,8 @@ import common.*
 import common.Position
 import edu.austral.dissis.chess.gui.*
 import common.conectUI.UIAdapter
-import common.validadoresDeJuego.ResultSet
-import common.validadoresDeJuego.GameValidator
+import common.gameValidator.ResultSet
+import common.gameValidator.GameValidator
 import edu.austral.dissis.common.GamesInterface
 
 class MyCheckers :  GamesInterface {

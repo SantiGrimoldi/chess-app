@@ -8,8 +8,8 @@ import edu.austral.dissis.chess.gui.PlayerColor.WHITE
 import common.Position
 import common.Board
 import common.User
-import common.validadoresDeJuego.ResultSet
-import common.validadoresDeJuego.GameValidator
+import common.gameValidator.ResultSet
+import common.gameValidator.GameValidator
 import edu.austral.dissis.common.GamesInterface
 
 class Mychess: GamesInterface {

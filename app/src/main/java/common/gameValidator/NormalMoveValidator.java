@@ -1,4 +1,4 @@
-package common.validadoresDeJuego;
+package common.gameValidator;
 
 import common.Piece;
 import common.Position;

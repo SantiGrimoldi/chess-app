@@ -1,4 +1,4 @@
-package common.validadoresDeJuego;
+package common.gameValidator;
 
 import common.Board;
 

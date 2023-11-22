@@ -1,18 +1,18 @@
 package edu.austral.dissis.chess
 
 import common.*
-import common.Movimientos.*
-import common.validadoresDeJuego.ValidadorAnd
-import common.validadoresDeJuego.GameValidator
-import common.validadoresDeJuego.MoveYourPieceValidator
-import common.validadoresDeJuego.SpecialMoveValidator
-import common.validadoresDeJuego.NormalMoveValidator
-import common.validadoresDeJuego.ValidadorOr
+import common.movements.*
+import common.gameValidator.ValidadorAnd
+import common.gameValidator.GameValidator
+import common.gameValidator.MoveYourPieceValidator
+import common.gameValidator.SpecialMoveValidator
+import common.gameValidator.NormalMoveValidator
+import common.gameValidator.ValidadorOr
 import edu.austral.dissis.chess.gui.PlayerColor
 import myChess.game.specialMovements.Enroque
 import myChess.game.specialMovements.PrimeroPeon
-import myChess.game.validadoresDeJuego.Jaque
-import myChess.game.validadoresDeJuego.JaqueMate
+import myChess.game.gameValidators.Jaque
+import myChess.game.gameValidators.JaqueMate
 import java.util.stream.IntStream
 
 class ChessFactory {
